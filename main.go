@@ -32,7 +32,7 @@ func main() {
 		OnStartup:        app.startup,
 		Bind: []any{
 			app,
-			&backend.API{},
+			backend.NewAPI(),
 		},
 	})
 

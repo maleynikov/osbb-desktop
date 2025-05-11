@@ -16,7 +16,7 @@ var (
 func getDB() *sql.DB {
 	once.Do(func() {
 		var err error
-		_db, err = sql.Open("sqlite3", "file:db.sqlite?cache=shared&mode=memory")
+		_db, err = sql.Open("sqlite3", "file:osbb.sqlite?cache=shared&mode=rwc")
 		if err != nil {
 			panic(err)
 		}
