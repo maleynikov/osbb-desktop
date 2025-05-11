@@ -9,3 +9,7 @@ export function GetUser(arg1) {
 export function Hello(arg1) {
   return window['go']['backend']['API']['Hello'](arg1);
 }
+
+export function ListUsers() {
+  return window['go']['backend']['API']['ListUsers']();
+}
