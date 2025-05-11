@@ -3,6 +3,8 @@ package main
 import (
 	"embed"
 
+	"osbb/backend"
+
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
@@ -12,6 +14,9 @@ import (
 var assets embed.FS
 
 func main() {
+	// Start the HTTP server
+	backend.StartHTTPServer()
+
 	// Create an instance of the app structure
 	app := NewApp()
 
@@ -27,6 +32,7 @@ func main() {
 		OnStartup:        app.startup,
 		Bind: []any{
 			app,
+			&backend.API{},
 		},
 	})
 
