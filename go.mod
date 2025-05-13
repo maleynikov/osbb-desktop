@@ -1,8 +1,11 @@
 module osbb
 
-go 1.23
+go 1.23.0
+
+toolchain go1.23.2
 
 require (
+	github.com/go-chi/chi/v5 v5.2.1
 	github.com/mattn/go-sqlite3 v1.14.28
 	github.com/wailsapp/wails/v2 v2.10.1
 )
@@ -33,7 +36,7 @@ require (
 	golang.org/x/crypto v0.33.0 // indirect
 	golang.org/x/net v0.35.0 // indirect
 	golang.org/x/sys v0.30.0 // indirect
-	golang.org/x/text v0.22.0 // indirect
+	golang.org/x/text v0.25.0 // indirect
 )
 
 // replace github.com/wailsapp/wails/v2 v2.10.1 => /Users/maxim/go/pkg/mod

@@ -1,23 +1,34 @@
 package backend
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-	name := r.URL.Query().Get("name")
-	if name == "" {
-		name = "гость"
-	}
-	resp := map[string]string{"message": "Salut, " + name + "!"}
-	json.NewEncoder(w).Encode(resp)
+type Server struct {
+	ctx context.Context
 }
 
-func StartHTTPServer() {
-	fmt.Println("Starting HTTP server on :8080")
+func (s *Server) Start() {
+	r := chi.NewRouter()
+	r.Use(middleware.Logger)
+	r.Get("/api/hello", func(w http.ResponseWriter, r *http.Request) {
+		name := r.URL.Query().Get("name")
+		if name == "" {
+			name = "гость"
+		}
+		resp := map[string]string{"message": "Salut, " + name + "!"}
+		json.NewEncoder(w).Encode(resp)
+	})
+	http.ListenAndServe(":3000", r)
+}
 
-	http.HandleFunc("/api/hello", helloHandler)
-	go http.ListenAndServe(":8080", nil)
+func NewServer(ctx context.Context) *Server {
+	return &Server{
+		ctx: ctx,
+	}
 }

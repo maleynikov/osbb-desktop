@@ -17,9 +17,6 @@ func main() {
 	// Create an instance of the app structure
 	app := NewApp()
 
-	// Run the API server
-	backend.StartHTTPServer()
-
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:  "osbb-desktop",

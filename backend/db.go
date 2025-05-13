@@ -28,10 +28,14 @@ func getDB() *sql.DB {
 
 func migrate() {
 	schema := `
-    CREATE TABLE IF NOT EXISTS users (
+    CREATE TABLE IF NOT EXISTS clients (
       id   INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
-      email TEXT UNIQUE NOT NULL
+      account_num TEXT UNIQUE NOT NULL,
+	  square TEXT NOT NULL,
+	  tarif REAL NOT NULL,
+	  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
     `
 	if _, err := _db.Exec(schema); err != nil {
