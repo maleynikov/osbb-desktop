@@ -1,6 +1,6 @@
-export default class Auth {
+class AuthService {
   public static async login(username: string): Promise<any> {
-    return fetch('http://localhost:3000/api/auth/login', {
+    return fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -15,3 +15,5 @@ export default class Auth {
     });
   }
 }
+
+export default AuthService;

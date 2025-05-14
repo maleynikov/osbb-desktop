@@ -1,4 +1,4 @@
-package backend
+package db
 
 import (
 	"database/sql"
@@ -13,7 +13,7 @@ var (
 	once sync.Once
 )
 
-func getDB() *sql.DB {
+func GetDB() *sql.DB {
 	once.Do(func() {
 		var err error
 		_db, err = sql.Open("sqlite3", "file:osbb.sqlite?cache=shared&mode=rwc")
@@ -38,6 +38,7 @@ func migrate() {
 	CREATE TABLE IF NOT EXISTS sessions (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		user_id INTEGER NOT NULL,
+		session_id TEXT NOT NULL,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 		FOREIGN KEY (user_id) REFERENCES users(id)
