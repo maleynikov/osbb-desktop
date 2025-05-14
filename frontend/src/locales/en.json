@@ -1,5 +1,6 @@
 {
     "welcome": "Welcome",
     "prompt_name": "Please enter your name below 👇",
-    "login": "Login"
+    "login": "Login",
+    "your_name": "Your name"
 }
