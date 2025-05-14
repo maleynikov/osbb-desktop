@@ -6,28 +6,25 @@ import (
 	"osbb/backend"
 )
 
-// App struct
 type App struct {
 	ctx context.Context
 }
 
-// NewApp creates a new App application struct
 func NewApp() *App {
 	return &App{}
 }
 
-// startup is called when the app starts. The context is saved
+// Greet returns a greeting for the given name
+func (app *App) Greet(name string) string {
+	return fmt.Sprintf("Hello %s, It's show time!", name)
+}
+
 // so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 
 	// start the backend server
-	server := backend.NewServer(ctx)
+	server := backend.NewServer()
 	go server.Start()
-	fmt.Println("API server started")
-}
-
-// Greet returns a greeting for the given name
-func (a *App) Greet(name string) string {
-	return fmt.Sprintf("Hello %s, It's show time!", name)
+	fmt.Println("API server started at :3000")
 }

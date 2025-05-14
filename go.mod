@@ -6,11 +6,14 @@ toolchain go1.23.2
 
 require (
 	github.com/go-chi/chi/v5 v5.2.1
+	github.com/go-chi/cors v1.2.1
+	github.com/go-chi/render v1.0.3
 	github.com/mattn/go-sqlite3 v1.14.28
 	github.com/wailsapp/wails/v2 v2.10.1
 )
 
 require (
+	github.com/ajg/form v1.5.1 // indirect
 	github.com/bep/debounce v1.2.1 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/godbus/dbus/v5 v5.1.0 // indirect

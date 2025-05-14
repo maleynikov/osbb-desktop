@@ -9,38 +9,23 @@ type API struct {
 	db *sql.DB
 }
 
-func NewAPI() *API {
-	return &API{
+func NewAPI() API {
+	return API{
 		db: getDB(),
 	}
 }
 
-func (a *API) Hello(name string) string {
-	return "Salut, " + name + "!"
-}
-
-func (a *API) GetUser(id int) models.User {
-	return models.User{ID: id, Name: "Maxime"}
-}
-
-func (a *API) ListUsers() ([]models.User, error) {
-	rows, err := a.db.Query("SELECT id, name, email FROM users")
+func (api *API) Login(username string) (*models.User, error) {
+	// Check if the user exists
+	var user models.User
+	err := api.db.QueryRow("SELECT id, name, is_admin FROM users WHERE name = ?", username).Scan(&user.ID, &user.Name, &user.IsAdmin)
 	if err != nil {
 		return nil, err
 	}
-	defer rows.Close()
-
-	var users []models.User
-	for rows.Next() {
-		var user models.User
-		if err := rows.Scan(&user.ID, &user.Name, &user.Email); err != nil {
-			return nil, err
-		}
-		users = append(users, user)
-	}
-
-	if err := rows.Err(); err != nil {
+	// Create a session for the user
+	_, err = api.db.Exec("INSERT INTO sessions (user_id) VALUES (?)", user.ID)
+	if err != nil {
 		return nil, err
 	}
-	return users, nil
+	return &user, nil
 }

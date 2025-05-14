@@ -9,5 +9,9 @@
   "author": {
     "name": "Maxim Aleynikov",
     "email": "max.aleyinikov@gmail.com"
+  },
+  "frontend": {
+    "dir": "frontend",
+    "devServerUrl": "http://localhost:3000"
   }
 }

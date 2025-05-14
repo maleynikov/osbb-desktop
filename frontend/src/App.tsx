@@ -1,28 +1,30 @@
-import {useState} from 'react';
-import logo from './assets/images/logo-universal.png';
 import './App.css';
-import {Greet} from "../wailsjs/go/main/App";
-import './i18n';
 import { useTranslation } from 'react-i18next';
+import Auth from './servises/Auth';
 
 function App() {
   const { t } = useTranslation();
-  const [resultText, setResultText] = useState(t('prompt_name'));
-  const [name, setName] = useState('');
-  const updateName = (e: any) => setName(e.target.value);
-  const updateResultText = (result: string) => setResultText(result);
-
-  function greet() {
-    Greet(name).then(updateResultText);
+  function login() {
+    const name = (document.getElementById('name') as HTMLInputElement).value;
+    if (name) {
+      Auth.login(name).then((data: any) => {
+        console.log(data);
+      });
+    }
   }
 
   return (
     <div id="App">
-      <img src={logo} id="logo" alt="logo"/>
-      <div id="result" className="result">{resultText}</div>
-      <div id="input" className="input-box">
-        <input id="name" className="input" onChange={updateName} autoComplete="off" name="input" type="text"/>
-        <button className="btn" onClick={greet}>Greet</button>
+      <h1 className="title">{t('welcome')}</h1>
+      <div className="prompt">{t('prompt_name')}</div>
+      <div id="login" className="input-box">
+        <input id="name"
+          className="input"
+          autoComplete="off"
+          name="input"
+          type="text"
+        />
+        <button className="btn" onClick={login}>{t('login')}</button>
       </div>
     </div>
   )
