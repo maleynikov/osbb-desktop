@@ -1,11 +1,15 @@
 package handlers
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"osbb/backend/db"
 	"osbb/backend/models"
+	"time"
 
 	"github.com/go-chi/render"
 )
@@ -40,14 +44,17 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := db.Exec("INSERT INTO sessions (user_id) VALUES (?)", user.ID)
+	hash := md5.New()
+	io.WriteString(hash, fmt.Sprintf("%d:%d", user.ID, time.Now().Unix()))
+	ssid := hex.EncodeToString(hash.Sum(nil))
+	_, err = db.Exec("INSERT INTO sessions (user_id, session_id) VALUES (?, ?)", user.ID, ssid)
+
 	if err != nil {
 		render.JSON(w, r, map[string]string{"status": "FAIL"})
 		return
 	}
-	sessionID, _ := res.LastInsertId()
 
 	render.JSON(w, r, map[string]string{
-		"ssid": fmt.Sprintf("%v", sessionID),
+		"ssid": ssid,
 	})
 }
