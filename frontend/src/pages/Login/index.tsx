@@ -41,6 +41,7 @@ const LoginPage = () => {
           variant="outlined"
           sx={{ width: '200px' }}
           autoFocus
+          autoComplete="off"
           required
         />
         <Button

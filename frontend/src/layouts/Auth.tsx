@@ -11,11 +11,14 @@ const Copyright = (props: any) => {
       {...props}
     >
       {'Copyright © '}
-      <Link color="inherit" href="https://github.com/maleynikov/osbb-desktop">
+      <Link color="inherit" href="https://github.com/maleynikov/osbb-desktop/">
         OSBB. Desctop App
-      </Link>{' 💖 '}
+      </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
+      <Typography variant="body2" sx={{ mt: 1 }}>
+        💖 <Link color="inherit" href="https://wails.io/">Wails</Link>
+      </Typography>
     </Typography>
   );
 };
