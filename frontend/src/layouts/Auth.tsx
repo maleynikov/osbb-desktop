@@ -23,7 +23,7 @@ const Copyright = (props: any) => {
       </Typography>
     </>
   );
-};
+}
 
 const AuthLayout = () => {
   return (
@@ -32,6 +32,6 @@ const AuthLayout = () => {
       <Copyright sx={{ mt: 2, mb: 2}} />
     </Container>
   );
-};
+}
 
 export default AuthLayout;

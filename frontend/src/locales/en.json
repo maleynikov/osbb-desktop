@@ -3,5 +3,8 @@
     "prompt_name": "Please enter your name below 👇",
     "login": "Login",
     "your_name": "Your name",
-    "required": "This field is required"
+    "required": "This field is required",
+    "login_failed": "Login failed",
+    "settings": "Settings",
+    "sign_out": "Sign out"
 }

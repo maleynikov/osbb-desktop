@@ -1,14 +1,30 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useTranslation } from 'react-i18next';
 import './styles.css';
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
+import AuthService from "../../servises/Auth";
+import { useAuth } from "../../hooks/useAuth";
+import { Navigate } from "react-router";
+import { useState } from "react";
+import Toastr from "../../components/widgets/Toastr";
 
+interface Err {
+  msg: string;
+}
+
+
+interface LoginValues {
+  username: string;
+} 
 
 const LoginPage = () => {
-  const handleSubmit = async (values: any) => {  
-    console.log(values);
-  };
   const { t } = useTranslation();
+  const auth = useAuth();
+  const [error, setError] = useState<Err | null>(null);
+
+  if (auth?.isLogged()) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
     <div id="login-page">
@@ -27,21 +43,34 @@ const LoginPage = () => {
       </Typography>
       <Formik
         initialValues={{ username: ''}}
-        validate={(values) => {
+        validate={(values: LoginValues) => {
           const errors: any = {};
           if (!values.username) {
             errors.username = t('required');
           }
           return errors;
         }}
-        onSubmit={handleSubmit}
+        onSubmit={async (
+          values: LoginValues,
+          { setSubmitting }: FormikHelpers<LoginValues>,
+        ) => {
+          try {
+            const { ssid } = await AuthService.login(values.username);
+            if (ssid) {
+              auth?.onLogin(ssid);
+            } else {
+              setError({msg: t('login_failed')});
+              setTimeout(() => setError(null), 3000);
+            }
+          } finally {
+            setSubmitting(false);
+          }
+        }}
       >
         {({
           values,
           errors,
-          touched,
           handleChange,
-          handleBlur,
           handleSubmit,
           isSubmitting,
         }) => (
@@ -61,10 +90,8 @@ const LoginPage = () => {
               size="small"
               variant="outlined"
               sx={{ width: '200px' }}
-              autoComplete="off"
               error={Boolean(errors.username)}
               onChange={handleChange}
-              onBlur={handleBlur}
               value={values.username}
               autoFocus
             />
@@ -77,11 +104,12 @@ const LoginPage = () => {
             >
               {t('login')}
             </Button>
-        </Box>
+          </Box>
         )}
       </Formik>
+      {error && (<Toastr message={error.msg} type="error" />)}
   </div>
   );
-};
+}
 
 export default LoginPage;

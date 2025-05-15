@@ -3,7 +3,11 @@ import { lightBlue } from '@mui/material/colors';
 import { Route, Routes, Navigate } from 'react-router';
 import AuthLayout from './layouts/Auth';
 import LoginPage from './pages/Login';
-
+import MainLayout from './layouts/Main';
+import DashboardPage from './pages/Dashboard';
+import TenantListPage from './pages/Tenant/List';
+import TenantEditPage from './pages/Tenant/Edit';
+import { AuthProvider } from './hooks/useAuth';
 
 const theme = createTheme({
   palette: {
@@ -17,12 +21,21 @@ function App() {
   return (
     <div id="app">
       <ThemeProvider theme={theme}>
-        <Routes>
-          <Route element={<AuthLayout />}>
-            <Route path="login" element={<LoginPage />} />
-          </Route>
-          <Route index element={<Navigate to="login" />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+              <Route element={<AuthLayout />}>
+                <Route path="login" element={<LoginPage />} />
+              </Route>
+              <Route element={<MainLayout />}>
+                <Route path="dashboard" element={<DashboardPage />} />
+                <Route path="tenants">
+                  <Route path="list" element={<TenantListPage />} />
+                  <Route path=":tid/edit" element={<TenantEditPage />} />
+                </Route>
+              </Route>
+              <Route index element={<Navigate to="login" />} />
+            </Routes>
+        </AuthProvider>
       </ThemeProvider>
     </div>
   )

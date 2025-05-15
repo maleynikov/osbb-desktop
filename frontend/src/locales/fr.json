@@ -3,5 +3,8 @@
     "prompt_name": "Veuillez entrer votre nom ci-dessous 👇",
     "login": "Connexion",
     "your_name": "Votre nom",
-    "required": "Ce champ est requis"
+    "required": "Ce champ est requis",
+    "login_failed": "Échec de la connexion",
+    "settings": "Paramètres",
+    "sign_out": "Déconnexion"
 }
