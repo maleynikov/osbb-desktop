@@ -33,4 +33,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: osbb-windows-build
-        path: build/windows/osbb_amd64.exe
+        path: build/bin/osbb_amd64.exe
