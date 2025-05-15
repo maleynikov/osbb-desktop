@@ -3,6 +3,7 @@ package db
 import (
 	"database/sql"
 	"fmt"
+	"osbb/backend/db/seeds"
 	"sync"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -21,7 +22,9 @@ func GetDB() *sql.DB {
 			panic(err)
 		}
 		migrate()
-		fmt.Println("database connected and migrated")
+		// seeds
+		seeds.Users(_db)
+		fmt.Println("database connected")
 	})
 	return _db
 }
