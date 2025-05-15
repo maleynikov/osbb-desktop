@@ -27,7 +27,7 @@ jobs:
       run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
 
     - name: Build Wails App
-      run: wails build -platform windows/amd64 -o build/window/osbb_amd64.exe
+      run: wails build -platform windows/amd64 -o osbb_amd64.exe
 
     - name: Upload EXE artifact
       uses: actions/upload-artifact@v4
