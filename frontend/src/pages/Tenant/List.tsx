@@ -1,82 +1,95 @@
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from '@mui/material';
-import Paper from '@mui/material/Paper';
+import { Box, Button, Paper, Typography } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import { useTranslation } from 'react-i18next';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { useEffect, useState } from 'react';
+import TenantService from '../../servises/Tenant';
 
-
-interface Tenant {
-  id: string;
-  name: string;
-  account_num: string;
-  square: string;
-  tarif: string;
+const defColumnOptions = {
+  sortable: true,
+  disableColumnMenu: true,
 }
 
-const TenantListPage = () => {
-  const tenats: Array<Tenant> = [
-    {
-      id: "1",
-      name: "Tenant 1",
-      account_num: "1234567890",
-      square: "100",
-      tarif: "1000",
-    },
-    {
-      id: "2",
-      name: "Tenant 2",
-      account_num: "0987654321",
-      square: "200",
-      tarif: "2000",
-    },
-  ];
+const paginationModel = { page: 0, pageSize: 10 };
 
-  const TenantList = tenats.map((tenant) => (
-    <div key={tenant.id}>
-      <h2>{tenant.name}</h2>
-      <p>Account Number: {tenant.account_num}</p>
-      <p>Square: {tenant.square}</p>
-      <p>Tarif: {tenant.tarif}</p>
-    </div>
-  ));
+const columns: GridColDef[] = [
+  { 
+    field: 'id',
+    headerName: 'ID',
+    ...defColumnOptions,
+  },
+  {
+    field: 'name',
+    headerName: 'Name',
+    width: 300,
+    ...defColumnOptions,
+  },
+  {
+    field: 'account_num',
+    headerName: 'Account Number',
+    ...defColumnOptions,
+  },
+  {
+    field: 'square',
+    headerName: 'Square',
+    type: 'number',
+    ...defColumnOptions,
+  },
+  {
+    field: 'tarif',
+    headerName: 'Tarif',
+    type: 'number',
+    ...defColumnOptions,
+  },
+];
+
+const TenantListPage = () => {
+  const [rows, setRows] = useState([]);
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await TenantService.getAll()
+        setRows(res.data);
+      } catch (error) {
+        console.error('error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <Box sx={{ padding: 2, backgroundColor: '' }}>
-      <Typography variant="h5" gutterBottom>
-        Tenant List
-      </Typography>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell align="right">Name</TableCell>
-              <TableCell align="right">Account Num</TableCell>
-              <TableCell align="right">Squere</TableCell>
-              <TableCell align="right">Tarif</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-          {tenats.map((tenant) => (
-            <TableRow
-              key={tenant.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">{tenant.id}</TableCell>
-              <TableCell align="right">{tenant.name}</TableCell>
-              <TableCell align="right">{tenant.account_num}</TableCell>
-              <TableCell align="right">{tenant.square}</TableCell>
-              <TableCell align="right">{tenant.tarif}</TableCell>
-            </TableRow>
-          ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={tenats.length}
-        rowsPerPage={5}
-        page={0}
-        onPageChange={() => {}}
-        onRowsPerPageChange={() => {}}
+    <Box sx={{
+      padding: 2,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 2
+    }}>
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 2,
+      }}>
+        <Typography variant="h5" gutterBottom>
+          {t('tenants.list')}
+        </Typography>
+        <Button
+          variant="outlined"
+          color="primary"
+          size="small"
+          startIcon={<AddIcon />}
+        >{t('tenants.add')}</Button>
+      </Box>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        checkboxSelection
+        initialState={{ pagination: { paginationModel } }}
+        pageSizeOptions={[10]}
+        sx={{maxHeight: 'calc(100vh - 200px)'}}
       />
     </Box>
   );

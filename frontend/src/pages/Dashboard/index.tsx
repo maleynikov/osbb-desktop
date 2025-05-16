@@ -6,12 +6,9 @@ const DashboardPage = () => {
   const { t } = useTranslation();
 
   return (
-    <Box sx={{ padding: 2 }}>
-      <Typography variant="h4" gutterBottom>
-        {t('dashboard')}
-      </Typography>
-      <Typography variant="body1">
-        {t('dashboard_title')}
+    <Box sx={{ padding: 2, textAlign: 'center' }}>
+      <Typography variant="h4" component="h1" gutterBottom>
+        {t('greeting', { name: 'User' })}
       </Typography>
     </Box>
   );

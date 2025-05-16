@@ -1,8 +1,9 @@
 package handlers
 
 import (
-	"errors"
+	"fmt"
 	"net/http"
+	"osbb/backend/db"
 
 	"github.com/go-chi/render"
 )
@@ -10,23 +11,11 @@ import (
 type TenantsCreatePayload struct {
 	Name       string  `json:"name"`
 	AccountNum string  `json:"account_num"`
-	Squere     int     `json:"squere"`
+	Square     int     `json:"square"`
 	Tarif      float32 `json:"tarif"`
 }
 
 func (p *TenantsCreatePayload) Bind(r *http.Request) error {
-	if p.Name == "" {
-		return errors.New("name is required")
-	}
-	if p.AccountNum == "" {
-		return errors.New("account_num is required")
-	}
-	if p.Squere <= 0 {
-		return errors.New("squere must be greater than 0")
-	}
-	if p.Tarif <= 0 {
-		return errors.New("tarif must be greater than 0")
-	}
 	return nil
 }
 
@@ -39,7 +28,34 @@ func TenantsCreateHandler(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
+	db := db.GetDB()
+
+	var err error
+	// if err = db.QueryRow("SELECT id FROM tenants WHERE account_num = $1", payload.AccountNum).Scan(&payload.AccountNum); err != nil {
+	// 	render.JSON(w, r, map[string]string{
+	// 		"status": "FAIL",
+	// 		"error":  err.Error(),
+	// 	})
+	// 	return
+	// }
+
+	res, err := db.Exec("INSERT INTO tenants (name, account_num, square, tarif) VALUES ($1, $2, $3, $4)",
+		payload.Name,
+		payload.AccountNum,
+		payload.Square,
+		fmt.Sprintf("%.2f", payload.Tarif),
+	)
+	if err != nil {
+		render.JSON(w, r, map[string]string{
+			"status": "FAIL",
+			"error":  err.Error(),
+		})
+		return
+	}
+	id, _ := res.LastInsertId()
+
 	render.JSON(w, r, map[string]string{
 		"status": "OK",
+		"data":   fmt.Sprintf("%v", id),
 	})
 }

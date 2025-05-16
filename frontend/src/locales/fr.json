@@ -1,5 +1,6 @@
 {
-    "welcome": "Bonjour",
+    "greeting": "Salut, {{name}} !",
+    "welcome": "Bienvenue",
     "prompt_name": "Veuillez entrer votre nom ci-dessous 👇",
     "login": "Connexion",
     "your_name": "Votre nom",
@@ -8,5 +9,11 @@
     "settings": "Paramètres",
     "sign_out": "Déconnexion",
     "dashboard": "Tableau de bord",
-    "dashboard_title": "Bienvenue sur le tableau de bord !"
+    "dashboard_title": "Bienvenue sur le tableau de bord !",
+    "tenants": {
+        "list": "Liste des locataires",
+        "add": "Ajouter un locataire",
+        "edit": "Modifier le locataire",
+        "delete": "Supprimer le locataire"
+    }
 }

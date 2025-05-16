@@ -18,7 +18,7 @@ const MainLayout = () => {
   }
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ height: "100vh", width: "100vw" }}>
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
         <Typography

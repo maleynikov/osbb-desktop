@@ -1,4 +1,5 @@
 {
+    "greeting": "Hello, {{name}}!",
     "welcome": "Welcome",
     "prompt_name": "Please enter your name below 👇",
     "login": "Login",
@@ -8,5 +9,11 @@
     "settings": "Settings",
     "sign_out": "Sign out",
     "dashboard": "Dashboard",
-    "dashboard_title": "Welcome to the dashboard!"
+    "dashboard_title": "Welcome to the dashboard!",
+    "tenants": {
+        "list": "Tenants list",
+        "add": "Add tenant",
+        "edit": "Edit tenant",
+        "delete": "Delete tenant"
+    }
 }

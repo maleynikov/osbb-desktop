@@ -36,9 +36,9 @@ func (s *Server) routes() http.Handler {
 	// protected routes
 	apiRouter.Group(func(r chi.Router) {
 		r.Use(middlewares.AuthMiddleware())
+		r.Get("/tenants", handlers.TenantsListHandler)
 		r.Post("/tenants/create", handlers.TenantsCreateHandler)
 	})
-
 	r.Mount("/api", apiRouter)
 
 	return r
