@@ -6,5 +6,7 @@
     "required": "This field is required",
     "login_failed": "Login failed",
     "settings": "Settings",
-    "sign_out": "Sign out"
+    "sign_out": "Sign out",
+    "dashboard": "Dashboard",
+    "dashboard_title": "Welcome to the dashboard!"
 }

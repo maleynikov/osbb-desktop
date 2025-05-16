@@ -6,5 +6,7 @@
     "required": "Ce champ est requis",
     "login_failed": "Échec de la connexion",
     "settings": "Paramètres",
-    "sign_out": "Déconnexion"
+    "sign_out": "Déconnexion",
+    "dashboard": "Tableau de bord",
+    "dashboard_title": "Bienvenue sur le tableau de bord !"
 }

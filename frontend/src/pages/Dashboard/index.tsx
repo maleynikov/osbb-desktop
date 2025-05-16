@@ -1,9 +1,19 @@
+import { Box, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
+
+
 const DashboardPage = () => {
+  const { t } = useTranslation();
+
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Welcome to the dashboard!</p>
-    </div>
+    <Box sx={{ padding: 2 }}>
+      <Typography variant="h4" gutterBottom>
+        {t('dashboard')}
+      </Typography>
+      <Typography variant="body1">
+        {t('dashboard_title')}
+      </Typography>
+    </Box>
   );
 }
 
