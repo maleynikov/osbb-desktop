@@ -8,6 +8,8 @@ import DashboardPage from './pages/Dashboard';
 import TenantListPage from './pages/Tenant/List';
 import TenantEditPage from './pages/Tenant/Edit';
 import { AuthProvider } from './hooks/useAuth';
+import ProfileLayout from './layouts/Profile';
+import SettingsPage from './pages/Settings';
 
 const theme = createTheme({
   palette: {
@@ -32,6 +34,9 @@ function App() {
                   <Route path="list" element={<TenantListPage />} />
                   <Route path=":tid/edit" element={<TenantEditPage />} />
                 </Route>
+              </Route>
+              <Route element={<ProfileLayout />}>
+                <Route path="settings" element={<SettingsPage />} />
               </Route>
               <Route index element={<Navigate to="login" />} />
             </Routes>

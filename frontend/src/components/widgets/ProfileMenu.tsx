@@ -8,6 +8,7 @@ import React from 'react';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useAuth } from '../../hooks/useAuth';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
 
 
 const ProfileMenu = () => {
@@ -17,6 +18,7 @@ const ProfileMenu = () => {
   const handleClose = () => setAnchorEl(null);
   const handleLogout = () => auth?.onLogout();
   const { t } = useTranslation();
+  const nav = useNavigate();
 
   return (
     <Box sx={{ flexGrow: 0 }}>
@@ -45,7 +47,9 @@ const ProfileMenu = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem disabled={true}>{t('settings')}</MenuItem>
+        <MenuItem onClick={() => {
+          nav('/settings')
+        }} disabled={true}>{t('settings')}</MenuItem>
         <MenuItem onClick={handleLogout}>{t('sign_out')}</MenuItem>
       </Menu>
     </Box>
