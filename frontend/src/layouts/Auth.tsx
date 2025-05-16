@@ -13,7 +13,7 @@ const Copyright = (props: any) => {
       >
         {'Copyright © '}
         <Link color="inherit" href="https://github.com/maleynikov/osbb-desktop/">
-          OSBB. Desctop App
+          OSBB. Desktop App
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}

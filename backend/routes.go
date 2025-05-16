@@ -3,6 +3,7 @@ package backend
 import (
 	"net/http"
 	"osbb/backend/handlers"
+	"osbb/backend/middlewares"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -31,6 +32,13 @@ func (s *Server) routes() http.Handler {
 	// api
 	apiRouter := chi.NewRouter()
 	apiRouter.Post("/auth/login", handlers.LoginHandler)
+
+	// protected routes
+	apiRouter.Group(func(r chi.Router) {
+		r.Use(middlewares.AuthMiddleware())
+		r.Post("/tenants/create", handlers.TenantsCreateHandler)
+	})
+
 	r.Mount("/api", apiRouter)
 
 	return r

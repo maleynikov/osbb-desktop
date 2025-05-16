@@ -12,7 +12,6 @@ interface Err {
   msg: string;
 }
 
-
 interface LoginValues {
   username: string;
 } 
