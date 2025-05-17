@@ -11,9 +11,38 @@
     "dashboard": "Tableau de bord",
     "dashboard_title": "Bienvenue sur le tableau de bord !",
     "tenants": {
+        "title": "Gestion des locataires",
         "list": "Liste des locataires",
         "add": "Ajouter un locataire",
         "edit": "Modifier le locataire",
-        "delete": "Supprimer le locataire"
+        "delete": "Supprimer le locataire",
+        "item": {
+            "new": "Nouveau locataire",
+            "edit": "Modifier le locataire #{{id}}"
+        }
+    },
+    "tenant": {
+        "name": "Nom complet",
+        "account_num": "Numéro de compte",
+        "square": "Carré",
+        "tariff": "Tarif"
+    },
+    "receipt": {
+        "title": "Reçu"
+    },
+    "btn": {
+        "add": "Ajouter",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "save": "Enregistrer",
+        "cancel": "Annuler",
+        "confirm": "Confirmer",
+        "close": "Fermer"
+    },
+    "pages": {
+        "tenants": "Locataires",
+        "receipt": "Reçu",
+        "settings": "Paramètres",
+        "dashboard": "Tableau de bord"
     }
 }

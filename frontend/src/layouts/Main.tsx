@@ -2,11 +2,12 @@ import { AppBar, Box, Button, Container, Toolbar, Typography } from "@mui/materi
 import { Navigate, Outlet, useNavigate } from "react-router";
 import ProfileMenu from "../components/widgets/ProfileMenu";
 import { useAuth } from "../hooks/useAuth";
+import { t } from "i18next";
 
 
 const pages = [
-  { name: "Tenants", path: "/tenants/list", enabled: true },
-  { name: "Receipt", path: "/receipt", enabled: false },
+  { name: "tenants", path: "/tenants/list", enabled: true },
+  { name: "receipt", path: "/receipt", enabled: false },
 ];
 
 const MainLayout = () => {
@@ -46,7 +47,7 @@ const MainLayout = () => {
                 sx={{ my: 2, color: 'white', display: 'block' }}
                 disabled={page.enabled === false}
               >
-                {page.name}
+                {t(`pages.${page.name}`)}
               </Button>
             ))}
           </Box>

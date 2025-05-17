@@ -11,9 +11,38 @@
     "dashboard": "Dashboard",
     "dashboard_title": "Welcome to the dashboard!",
     "tenants": {
+        "title": "Tenants",
         "list": "Tenants list",
         "add": "Add tenant",
         "edit": "Edit tenant",
-        "delete": "Delete tenant"
+        "delete": "Delete tenant",
+        "item": {
+            "new": "New tenant",
+            "edit": "Edit tenant #{{id}}"
+        }
+    },
+    "tenant": {
+        "name": "Full name",
+        "account_num": "Account Number",
+        "square": "Square",
+        "tariff": "Tariff"
+    },
+    "receipt": {
+        "title": "Receipt"
+    },
+    "btn": {
+        "add": "Add",
+        "edit": "Edit",
+        "delete": "Delete",
+        "save": "Save",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "close": "Close"
+    },
+    "pages": {
+        "tenants": "Tenants",
+        "receipt": "Receipt",
+        "settings": "Settings",
+        "dashboard": "Dashboard"
     }
 }

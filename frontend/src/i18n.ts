@@ -11,7 +11,7 @@ i18n.use(initReactI18next).init({
     ru: { common: commonRU },
     fr: { common: commonFR },
   },
-  lng: 'fr',
+  lng: 'ru',
   fallbackLng: 'en',
   ns: ['common'],
   defaultNS: 'common',

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import TenantService from '../../servises/Tenant';
+import { useNavigate } from 'react-router';
 
 const defColumnOptions = {
   sortable: true,
@@ -46,6 +47,8 @@ const columns: GridColDef[] = [
 const TenantListPage = () => {
   const [rows, setRows] = useState([]);
   const { t } = useTranslation();
+  const nav = useNavigate();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,6 +84,7 @@ const TenantListPage = () => {
           color="primary"
           size="small"
           startIcon={<AddIcon />}
+          onClick={() => nav('/tenants/0/edit')}
         >{t('tenants.add')}</Button>
       </Box>
       <DataGrid
