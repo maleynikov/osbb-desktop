@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 
@@ -6,11 +6,17 @@ const DashboardPage = () => {
   const { t } = useTranslation();
 
   return (
-    <Box sx={{ padding: 2, textAlign: 'center' }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        {t('greeting', { name: 'User' })}
-      </Typography>
-    </Box>
+    <Grid container spacing={2} sx={{
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 'calc(100vh - 64px)',
+    }}>
+      <Box sx={{ padding: 2, textAlign: 'center' }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          {t('greeting', { name: 'admin' })}
+        </Typography>
+      </Box>
+    </Grid>
   );
 }
 
