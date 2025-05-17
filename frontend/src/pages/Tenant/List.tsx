@@ -1,10 +1,12 @@
-import { Box, Button, Paper, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowId, GridRowSelectionModel } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import TenantService from '../../servises/Tenant';
 import { useNavigate } from 'react-router';
+import DelIcon from '@mui/icons-material/Delete';
+
 
 const defColumnOptions = {
   sortable: true,
@@ -48,7 +50,7 @@ const TenantListPage = () => {
   const [rows, setRows] = useState([]);
   const { t } = useTranslation();
   const nav = useNavigate();
-
+  const [selectedIds, setSelectedIds] = useState<GridRowId[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,10 +61,14 @@ const TenantListPage = () => {
         console.error('error fetching data:', error);
       }
     };
-
     fetchData();
   }, []);
 
+  const delHandler = async () => {
+    if (selectedIds.length === 0) {
+      return
+    }
+  }
   return (
     <Box sx={{
       padding: 2,
@@ -79,13 +85,25 @@ const TenantListPage = () => {
         <Typography variant="h5" gutterBottom>
           {t('tenants.list')}
         </Typography>
-        <Button
-          variant="outlined"
-          color="primary"
-          size="small"
-          startIcon={<AddIcon />}
-          onClick={() => nav('/tenants/0/edit')}
-        >{t('tenants.add')}</Button>
+        <div className="actions-area">
+            {selectedIds.length > 0 && (
+              <Button
+                variant="outlined"
+                color="error"
+                size="small"
+                startIcon={<DelIcon />}
+                sx={{ marginRight: 2}}
+                onClick={delHandler}
+              >{t('tenants.delete')}</Button>
+            )}
+            <Button
+              variant="outlined"
+              color="primary"
+              size="small"
+              startIcon={<AddIcon />}
+              onClick={() => nav('/tenants/0/edit')}
+            >{t('tenants.add')}</Button>
+        </div>
       </Box>
       <DataGrid
         rows={rows}
@@ -94,6 +112,9 @@ const TenantListPage = () => {
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[10]}
         sx={{maxHeight: 'calc(100vh - 200px)'}}
+        onRowSelectionModelChange={(selection: GridRowSelectionModel) => {
+          setSelectedIds(Array.from(selection.ids));
+        }}
       />
     </Box>
   );
