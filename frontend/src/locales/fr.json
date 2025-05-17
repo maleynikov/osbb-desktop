@@ -10,6 +10,8 @@
     "sign_out": "Déconnexion",
     "dashboard": "Tableau de bord",
     "dashboard_title": "Bienvenue sur le tableau de bord !",
+    "created": "Créé",
+    "error": "Erreur",
     "tenants": {
         "title": "Gestion des locataires",
         "list": "Liste des locataires",

@@ -10,6 +10,8 @@
     "sign_out": "Sign out",
     "dashboard": "Dashboard",
     "dashboard_title": "Welcome to the dashboard!",
+    "created": "Created",
+    "error": "Error",
     "tenants": {
         "title": "Tenants",
         "list": "Tenants list",

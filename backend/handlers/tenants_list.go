@@ -18,7 +18,7 @@ func (p *TenantsListPayload) Bind(r *http.Request) error {
 
 func TenantsListHandler(w http.ResponseWriter, r *http.Request) {
 	payload := &TenantsListPayload{
-		Limit: 10,
+		Limit: 100,
 	}
 	// if err := render.Bind(r, payload); err != nil {
 	// 	render.JSON(w, r, map[string]string{

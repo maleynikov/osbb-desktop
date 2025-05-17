@@ -1,5 +1,5 @@
 interface Tenant {
-    id: string;
+    id?: string;
     name: string;
     account_num: string;
     square: string;

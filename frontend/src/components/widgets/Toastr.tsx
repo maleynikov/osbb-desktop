@@ -28,11 +28,14 @@ const Toastr = (props: ToastrProps) => {
   return (
     <Snackbar
       open={open}
-      TransitionComponent={TransitionUp}
+      autoHideDuration={5000}
       onClose={() => setOpen(false)}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'center',
+      }}
+      slots={{
+        transition: TransitionUp,
       }}
     >
       <Alert
