@@ -72,6 +72,9 @@ const TenantEditPage = () => {
             if (!values.account_num) {
               errors.account_num = t('err.account_num_required');
             }
+            if (!values.square) {
+              errors.square = t('err.square_required');
+            }
             return errors;
           }}
         >
@@ -120,7 +123,6 @@ const TenantEditPage = () => {
                       value={values.account_num}
                       error={Boolean(errors.account_num)}
                       onChange={handleChange}
-                      required
                     />
                     <TextField
                       name="square"
@@ -138,7 +140,6 @@ const TenantEditPage = () => {
                           endAdornment: <InputAdornment position="start">m2</InputAdornment>,
                         },
                       }}
-                      required
                     />
                     <TextField
                       name="tarif"
@@ -153,7 +154,6 @@ const TenantEditPage = () => {
                           endAdornment: <InputAdornment position="start">rub</InputAdornment>,
                         },
                       }}
-                      required
                     />
                   </CardContent>
                   <CardActions sx={{
