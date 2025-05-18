@@ -38,6 +38,7 @@ func (s *Server) routes() http.Handler {
 		r.Use(middlewares.AuthMiddleware())
 		r.Get("/tenants", handlers.TenantsListHandler)
 		r.Post("/tenants/create", handlers.TenantsCreateHandler)
+		r.Delete("/tenants/delete", handlers.TenantsDelHandler)
 	})
 	r.Mount("/api", apiRouter)
 

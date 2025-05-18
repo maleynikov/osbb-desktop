@@ -5,7 +5,7 @@ import { DataGrid, GridColDef, GridRowId, GridRowSelectionModel } from '@mui/x-d
 import { useEffect, useState } from 'react';
 import TenantService from '../../servises/Tenant';
 import { useNavigate } from 'react-router';
-import DelIcon from '@mui/icons-material/Delete';
+import DelRecordsBtn from './components/DelRecordsBtn';
 
 
 const defColumnOptions = {
@@ -51,6 +51,11 @@ const TenantListPage = () => {
   const { t } = useTranslation();
   const nav = useNavigate();
   const [selectedIds, setSelectedIds] = useState<GridRowId[]>([]);
+  const [trigger, setTrigger] = useState(0);
+
+  const refetch = () => {
+    setTrigger(prev => prev + 1);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,13 +67,8 @@ const TenantListPage = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [trigger]);
 
-  const delHandler = async () => {
-    if (selectedIds.length === 0) {
-      return
-    }
-  }
   return (
     <Box sx={{
       padding: 2,
@@ -87,14 +87,7 @@ const TenantListPage = () => {
         </Typography>
         <div className="actions-area">
             {selectedIds.length > 0 && (
-              <Button
-                variant="outlined"
-                color="error"
-                size="small"
-                startIcon={<DelIcon />}
-                sx={{ marginRight: 2}}
-                onClick={delHandler}
-              >{t('tenants.delete')}</Button>
+              <DelRecordsBtn ids={selectedIds.map(id => Number(id))} onRefresh={refetch}/>
             )}
             <Button
               variant="outlined"
