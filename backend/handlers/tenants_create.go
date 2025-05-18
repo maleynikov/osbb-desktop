@@ -9,10 +9,10 @@ import (
 )
 
 type TenantsCreatePayload struct {
-	Name       string  `json:"name"`
-	AccountNum string  `json:"account_num"`
-	Square     int     `json:"square"`
-	Tarif      float32 `json:"tarif"`
+	Name       string `json:"name"`
+	AccountNum string `json:"account_num"`
+	Square     string `json:"square"`
+	Tarif      string `json:"tarif"`
 }
 
 func (p *TenantsCreatePayload) Bind(r *http.Request) error {
@@ -31,19 +31,11 @@ func TenantsCreateHandler(w http.ResponseWriter, r *http.Request) {
 	db := db.GetDB()
 
 	var err error
-	// if err = db.QueryRow("SELECT id FROM tenants WHERE account_num = $1", payload.AccountNum).Scan(&payload.AccountNum); err != nil {
-	// 	render.JSON(w, r, map[string]string{
-	// 		"status": "FAIL",
-	// 		"error":  err.Error(),
-	// 	})
-	// 	return
-	// }
-
 	res, err := db.Exec("INSERT INTO tenants (name, account_num, square, tarif) VALUES ($1, $2, $3, $4)",
 		payload.Name,
 		payload.AccountNum,
 		payload.Square,
-		fmt.Sprintf("%.2f", payload.Tarif),
+		payload.Tarif,
 	)
 	if err != nil {
 		render.JSON(w, r, map[string]string{

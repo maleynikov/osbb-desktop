@@ -15,13 +15,14 @@ const TenantEditPage = () => {
   const initialValues = {
     name: '',
     account_num: '',
-    square: 0,
+    square: '0.0',
     tarif: '0.00',
   }
   const onSubmit = async (values: any, { resetForm }: FormikHelpers<any>) => {
     const preparedValues = {
       ...values,
-      tarif: parseFloat(values.tarif),
+      tarif: parseFloat(values.tarif).toFixed(2),
+      square: parseFloat(values.square).toFixed(1),
     };
     console.log('preparedValues', preparedValues);
     const res = await TenantService.create(preparedValues);
@@ -66,14 +67,14 @@ const TenantEditPage = () => {
             if (isNaN(Number(values.tarif)) || Number(values.tarif) <= 0) {
               errors.tarif = t('err.tarif_invalid');
             }
+            if (isNaN(Number(values.square)) || Number(values.square) <= 0) {
+              errors.square = t('err.square_required');
+            }
             if (!values.name) {
               errors.name = t('err.name_required');
             }
             if (!values.account_num) {
               errors.account_num = t('err.account_num_required');
-            }
-            if (!values.square) {
-              errors.square = t('err.square_required');
             }
             return errors;
           }}
@@ -131,10 +132,7 @@ const TenantEditPage = () => {
                       label={t('tenant.square')}
                       value={values.square}
                       error={Boolean(errors.square)}
-                      onChange={(e) => {
-                        const intValue = parseInt(e.target.value, 10);
-                        setFieldValue('square', isNaN(intValue) ? '' : intValue);
-                      }}
+                      onChange={handleChange}
                       slotProps={{
                         input: {
                           endAdornment: <InputAdornment position="start">m2</InputAdornment>,
