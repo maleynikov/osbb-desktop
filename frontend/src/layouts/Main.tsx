@@ -7,7 +7,7 @@ import { t } from "i18next";
 
 const pages = [
   { name: "tenants", path: "/tenants/list", enabled: true },
-  { name: "receipt", path: "/receipt", enabled: false },
+  { name: "receipt", path: "/receipt", enabled: true },
 ];
 
 const MainLayout = () => {

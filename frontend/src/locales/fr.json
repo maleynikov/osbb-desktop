@@ -30,7 +30,8 @@
         "tariff": "Tarif"
     },
     "receipt": {
-        "title": "Reçu"
+        "title": "Reçu",
+        "title_example": "Example de Reçu"
     },
     "btn": {
         "add": "Ajouter",
