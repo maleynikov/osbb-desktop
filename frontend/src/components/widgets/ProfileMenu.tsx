@@ -48,8 +48,9 @@ const ProfileMenu = () => {
         onClose={handleClose}
       >
         <MenuItem onClick={() => {
-          nav('/settings')
-        }} disabled={true}>{t('settings')}</MenuItem>
+          setAnchorEl(null);
+          nav('/receipt')
+        }}>{t('receipt.title_example')}</MenuItem>
         <MenuItem onClick={handleLogout}>{t('sign_out')}</MenuItem>
       </Menu>
     </Box>

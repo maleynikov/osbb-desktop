@@ -1,5 +1,6 @@
 import { Outlet } from "react-router";
 
+
 const ProfileLayout = () => {
   return (
     <div className="flex flex-col h-full">

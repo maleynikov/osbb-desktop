@@ -226,20 +226,19 @@ export const ReceiptOrigin = React.forwardRef<HTMLDivElement, { data: ReceiptDat
             <tbody>
               <tr>
                 <td>
-                  <p>
+                  <p style={{height: '10px'}}>
                     <span>Реквизиты для оплаты: </span>
                     <span style={{ fontWeight: 'bold' }}>ТСЖ "Росинка"  ИНН 9001032516  КПП 900101001</span>
                   </p>
-                  <p>
+                  <p style={{height: '10px'}}>
                     <span>Банк получателя: </span>
                     <span style={{ fontWeight: 'bold' }}>Сбербанк БИК 046015602</span>
                   </p>
-                  <p>
+                  <p style={{height: '10px'}}>
                     <span>Расчетный счет: </span>
                     <span style={{ fontWeight: 'bold' }}>Р/С 40703810452720000076</span>
-
                   </p>
-                  <p>
+                  <p style={{height: '10px'}}>
                     <span>Назначение платежа: </span>
                     <span style={{ fontWeight: 'bold' }}>л/с 47 Чернышева Елена Георгиевна. взносы на содержание дома </span>
                   </p>

@@ -2,8 +2,8 @@ import { AppBar, Box, Button, Container, Toolbar, Typography } from "@mui/materi
 import { Navigate, Outlet, useNavigate } from "react-router";
 import ProfileMenu from "../components/widgets/ProfileMenu";
 import { useAuth } from "../hooks/useAuth";
-import { t } from "i18next";
 import pages, { Page } from "../pages";
+
 
 const MainLayout = () => {
   const auth = useAuth();
@@ -40,10 +40,7 @@ const MainLayout = () => {
                 key={page.name}
                 onClick={() => nav(page.path)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
-                disabled={page.enabled === false}
-              >
-                {t(`pages.${page.name}`)}
-              </Button>
+              >{page.name}</Button>
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
