@@ -13,5 +13,16 @@
   "frontend": {
     "dir": "frontend",
     "devServerUrl": "http://localhost:3000"
+  },
+  "platforms": {
+    "darwin": {
+      "webview": {
+        "browser": "webkit",
+        "allowpopups": true
+      }
+    }
+  },
+  "security": {
+    "csp": ""
   }
 }

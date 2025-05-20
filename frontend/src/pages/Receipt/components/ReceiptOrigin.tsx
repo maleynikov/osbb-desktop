@@ -1,8 +1,23 @@
 import { Box } from "@mui/material";
+import React from 'react';
 
-const ReceiptOrigin = () => {
-  return (
-    <Box sx={{
+interface ReceiptData {
+    name: string;
+    accountNum: number;
+    appNum: number;
+    square: number;
+    tarif: number;
+}
+
+  // calc some fields like
+  // sum to pay
+  // dept
+  // benefit
+  // etc
+
+export const ReceiptOrigin = React.forwardRef<HTMLDivElement, { data: ReceiptData }>(
+  ({ data }, ref) => (
+    <Box ref={ref} sx={{
       padding: 2,
       backgroundColor: "#fff",
     }}>
@@ -36,21 +51,21 @@ const ReceiptOrigin = () => {
                 <td>
                   <p>
                     <span>Адрес: </span>
-                    <span style={{ fontWeight: 'bold' }}>ул. Героев Сталинграда 3, кв. 47</span>
+                    <span style={{ fontWeight: 'bold' }}>ул. Героев Сталинграда 3, кв. {data.appNum}</span>
                   </p>
                   <p>
                     <span>Собственник: </span>
-                    <span style={{ fontWeight: 'bold' }}>Чернышева Елена Георгиевна</span>
+                    <span style={{ fontWeight: 'bold' }}>{data.name}</span>
                   </p>
                 </td>
                 <td>
                   <p>
                     <span>Лицевой счет: </span>
-                    <span style={{ fontWeight: 'bold' }}>47</span>
+                    <span style={{ fontWeight: 'bold' }}>{data.accountNum}</span>
                   </p>
                   <p>
                     <span>Общая площадь: </span>
-                    <span style={{ fontWeight: 'bold' }}>82,3 м кв.</span>
+                    <span style={{ fontWeight: 'bold' }}>{data.square.toFixed(1).replace('.', ',')} м кв.</span>
                   </p>
                 </td>
               </tr>
@@ -137,7 +152,7 @@ const ReceiptOrigin = () => {
                     fontSize: '10px',
                     border: '1px solid #0c0c0c',
                     width: '10%',
-                  }} align="right">4,80</td>
+                  }} align="right">{data.tarif.toFixed(2).replace('.', ',')}</td>
                   <td style={{
                     verticalAlign: 'middle',
                     padding: '2px 4px 2px 2px',
@@ -242,7 +257,4 @@ const ReceiptOrigin = () => {
         </div>
       </div>
     </Box>
-  );
-}
-
-export { ReceiptOrigin }
+  ))
