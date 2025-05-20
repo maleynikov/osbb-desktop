@@ -46,7 +46,8 @@
         "tenants": "Жильцы",
         "receipt": "Квитанция",
         "settings": "Настройки",
-        "dashboard": "Панель управления"
+        "dashboard": "Панель управления",
+        "payments": "Платежи"
     },
     "confirm_dialog": {
         "title": "Вы уверены?",

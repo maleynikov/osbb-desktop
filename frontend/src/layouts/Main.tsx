@@ -3,12 +3,7 @@ import { Navigate, Outlet, useNavigate } from "react-router";
 import ProfileMenu from "../components/widgets/ProfileMenu";
 import { useAuth } from "../hooks/useAuth";
 import { t } from "i18next";
-
-
-const pages = [
-  { name: "tenants", path: "/tenants/list", enabled: true },
-  { name: "receipt", path: "/receipt", enabled: true },
-];
+import pages, { Page } from "../pages";
 
 const MainLayout = () => {
   const auth = useAuth();
@@ -40,7 +35,7 @@ const MainLayout = () => {
             OSBB
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((page: Page) => (
               <Button
                 key={page.name}
                 onClick={() => nav(page.path)}

@@ -12,6 +12,11 @@ import ProfileLayout from './layouts/Profile';
 import SettingsPage from './pages/Settings';
 import ReceiptPage from './pages/Receipt';
 
+import {
+  PaymentsPage,
+} from './pages';
+
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -34,6 +39,9 @@ function App() {
                 <Route path="tenants">
                   <Route path="list" element={<TenantListPage />} />
                   <Route path=":tid/edit" element={<TenantEditPage />} />
+                </Route>
+                <Route path="payments">
+                  <Route index element={<PaymentsPage />} />
                 </Route>
                 <Route path="receipt" element={<ReceiptPage />} />
               </Route>

@@ -46,6 +46,7 @@
         "tenants": "Tenants",
         "receipt": "Receipt",
         "settings": "Settings",
-        "dashboard": "Dashboard"
+        "dashboard": "Dashboard",
+        "payments": "Payments"
     }
 }
