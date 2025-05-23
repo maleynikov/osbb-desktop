@@ -57,6 +57,17 @@ func migrate() {
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
+	CREATE TABLE IF NOT EXISTS payments (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		tenant_id INTEGER NOT NULL,
+		amount DECIMAL(10,2) NOT NULL,
+		period DATE NOT NULL,
+		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+		FOREIGN KEY (tenant_id) REFERENCES tenants(id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+	);
     `
 	if _, err := _db.Exec(schema); err != nil {
 		panic(fmt.Sprintf("migration: %v", err))

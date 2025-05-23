@@ -1,5 +1,7 @@
-import { t } from "i18next";
-import PaymentsPage from './Payments';
+import TenantsListPage from './Tenant/List'
+import TenantsEditPage from './Tenant/Edit'
+import PaymentsListPage from './Payments/List';
+import PaymentsEditPage from './Payments/Edit';
 
 
 export interface Page {
@@ -8,12 +10,15 @@ export interface Page {
 }
 
 export {
-  PaymentsPage,
+  TenantsEditPage,
+  TenantsListPage,
+  PaymentsListPage,
+  PaymentsEditPage,
 }
 
 const pages: Array<Page> = [
-  { name: t('pages.tenants'), path: "/tenants/list" },
-  { name: t('pages.payments'), path: "/payments" },
+  { name: 'pages.tenants', path: "/tenants/list" },
+  { name: 'pages.payments', path: "/payments/list" },
 ];
 
 export default pages;

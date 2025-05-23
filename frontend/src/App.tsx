@@ -5,15 +5,16 @@ import AuthLayout from './layouts/Auth';
 import LoginPage from './pages/Login';
 import MainLayout from './layouts/Main';
 import DashboardPage from './pages/Dashboard';
-import TenantListPage from './pages/Tenant/List';
-import TenantEditPage from './pages/Tenant/Edit';
 import { AuthProvider } from './hooks/useAuth';
 import ProfileLayout from './layouts/Profile';
 import SettingsPage from './pages/Settings';
 import ReceiptPage from './pages/Receipt';
 
 import {
-  PaymentsPage,
+  TenantsListPage,
+  TenantsEditPage,
+  PaymentsListPage,
+  PaymentsEditPage,
 } from './pages';
 
 
@@ -37,11 +38,12 @@ function App() {
               <Route element={<MainLayout />}>
                 <Route path="dashboard" element={<DashboardPage />} />
                 <Route path="tenants">
-                  <Route path="list" element={<TenantListPage />} />
-                  <Route path=":tid/edit" element={<TenantEditPage />} />
+                  <Route path="list" element={<TenantsListPage />} />
+                  <Route path=":tid/edit" element={<TenantsEditPage />} />
                 </Route>
                 <Route path="payments">
-                  <Route index element={<PaymentsPage />} />
+                  <Route path="list" element={<PaymentsListPage />} />
+                  <Route path=":pid/edit" element={<PaymentsEditPage />} />
                 </Route>
                 <Route path="receipt" element={<ReceiptPage />} />
               </Route>

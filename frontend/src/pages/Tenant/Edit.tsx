@@ -7,17 +7,20 @@ import Toastr from "../../components/widgets/Toastr";
 import { useState } from "react";
 import { FormikHelpers } from 'formik';
 
-const TenantEditPage = () => {
+
+const initialValues = {
+  name: '',
+  account_num: '',
+  square: '0.0',
+  tarif: '0.00',
+}
+
+export default () => {
   const params = useParams();
   const { t } = useTranslation();
   const [success, setSuccess] = useState(false);
   const [err, setErr] = useState(false);
-  const initialValues = {
-    name: '',
-    account_num: '',
-    square: '0.0',
-    tarif: '0.00',
-  }
+
   const onSubmit = async (values: any, { resetForm }: FormikHelpers<any>) => {
     const preparedValues = {
       ...values,
@@ -82,7 +85,6 @@ const TenantEditPage = () => {
            {({
               handleSubmit,
               handleChange,
-              setFieldValue,
               values,
               isSubmitting,
               errors,
@@ -189,5 +191,3 @@ const TenantEditPage = () => {
     </Grid>
   );
 }
-
-export default TenantEditPage;

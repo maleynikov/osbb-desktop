@@ -46,7 +46,7 @@ const columns: GridColDef[] = [
   },
 ];
 
-const TenantListPage = () => {
+export default () => {
   const [rows, setRows] = useState([]);
   const { t } = useTranslation();
   const nav = useNavigate();
@@ -112,5 +112,3 @@ const TenantListPage = () => {
     </Box>
   );
 }
-
-export default TenantListPage;
