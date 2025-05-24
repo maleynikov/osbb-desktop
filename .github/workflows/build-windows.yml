@@ -39,11 +39,8 @@ jobs:
           Write-Host "Found binary: $($_.FullName)"
         }
 
-    - name: Build Windows Installer
-      run: makensis /DARG_WAILS_AMD64_BINARY="build/bin/osbb.exe" build/windows/installer/project.nsi
-
-    - name: Upload EXE artifact
+    - name: Upload EXE Installer
       uses: actions/upload-artifact@v4
       with:
-        name: osbb-windows
-        path: build/bin/osbb.exe
+        name: osbb-installer
+        path: build\bin\osbb-amd64-installer.exe
