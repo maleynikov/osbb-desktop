@@ -1,6 +1,12 @@
 {
   "$schema": "https://wails.io/schemas/config.v2.json",
   "name": "osbb",
+  "info": {
+    "productName": "OSBB",
+    "companyName": "Maxime Labs",
+    "productVersion": "1.0.0.0",
+    "copyright": "© 2025 Maxime Labs"
+  },
   "outputfilename": "osbb",
   "frontend:install": "npm install",
   "frontend:build": "npm run build",
@@ -21,8 +27,5 @@
         "allowpopups": true
       }
     }
-  },
-  "info": {
-    "ProductVersion": "1.0.0.0"
   }
 }
