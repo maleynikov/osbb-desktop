@@ -39,6 +39,16 @@ jobs:
           Write-Host "Found binary: $($_.FullName)"
         }
 
+    - name: Find app binary and build NSIS installer
+      shell: pwsh
+      run: |
+        $exe = Get-ChildItem -Recurse -Path build -Filter *.exe | Where-Object { $_.Name -like "*.exe" -and $_.FullName -notmatch "installer" } | Select-Object -First 1
+        if (-not $exe) { throw "Executable not found" }
+
+        Write-Host "Using binary: $($exe.FullName)"
+
+        & "makensis" /DARG_WAILS_AMD64_BINARY="$($exe.FullName)" build/windows/installer/project.nsi
+
     # - name: Upload EXE Installer
     #   uses: actions/upload-artifact@v4
     #   with:
