@@ -40,6 +40,7 @@ function App() {
                 <Route path="tenants">
                   <Route path="list" element={<TenantsListPage />} />
                   <Route path=":tid/edit" element={<TenantsEditPage />} />
+                  <Route path="create" element={<TenantsEditPage />} />
                 </Route>
                 <Route path="payments">
                   <Route path="list" element={<PaymentsListPage />} />
