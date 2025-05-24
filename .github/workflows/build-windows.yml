@@ -32,6 +32,9 @@ jobs:
     - name: Build Wails App
       run: wails build -platform windows/amd64 --nsis -o osbb.exe
 
+    - name: "Debug: List files"
+      run: dir build\bin /s
+
     - name: Build Windows Installer
       run: makensis /DARG_WAILS_AMD64_BINARY="build/bin/osbb.exe" build/windows/installer/project.nsi
 
