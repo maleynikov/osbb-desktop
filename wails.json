@@ -22,7 +22,7 @@
       }
     }
   },
-  "security": {
-    "csp": ""
+  "info": {
+    "ProductVersion": "1.0.0.0"
   }
 }
