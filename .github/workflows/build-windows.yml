@@ -32,8 +32,12 @@ jobs:
     - name: Build Wails App
       run: wails build -platform windows/amd64 --nsis -o osbb.exe
 
-    - name: "Debug: List files"
-      run: dir build\bin /s
+    - name: List all EXE files
+      shell: pwsh
+      run: |
+        Get-ChildItem -Recurse -Path build -Filter *.exe | ForEach-Object {
+          Write-Host "Found binary: $($_.FullName)"
+        }
 
     - name: Build Windows Installer
       run: makensis /DARG_WAILS_AMD64_BINARY="build/bin/osbb.exe" build/windows/installer/project.nsi
