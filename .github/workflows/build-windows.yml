@@ -26,9 +26,6 @@ jobs:
     - name: Install Wails CLI
       run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
 
-    - name: Install NSIS
-      run: choco install nsis -y
-
     - name: Build Wails App
       run: wails build -platform windows --nsis
 
@@ -39,18 +36,10 @@ jobs:
           Write-Host "Found binary: $($_.FullName)"
         }
 
-    - name: Find app binary and build NSIS installer
-      shell: pwsh
-      run: |
-        $exe = Get-ChildItem -Recurse -Path build -Filter *.exe | Where-Object { $_.Name -like "*.exe" -and $_.FullName -notmatch "installer" } | Select-Object -First 1
-        if (-not $exe) { throw "Executable not found" }
-
-        Write-Host "Using binary: $($exe.FullName)"
-
-        & "makensis" /DARG_WAILS_AMD64_BINARY="$($exe.FullName)" build/windows/installer/project.nsi
-
-    # - name: Upload EXE Installer
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: osbb-installer
-    #     path: build\bin\osbb-amd64-installer.exe
+    - name: Upload EXE Installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: osbb
+        path: |
+          build\bin\osbb.exe
+          build\bin\osbb-amd64-installer.exe
