@@ -1,4 +1,4 @@
-name: Build OSBB App (windows/amd64)
+name: Build OSBB App (windows)
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
       run: choco install nsis -y
 
     - name: Build Wails App
-      run: wails build -platform windows --nsis -o osbb.exe
+      run: wails build -platform windows --nsis
 
     - name: List all EXE files
       shell: pwsh
