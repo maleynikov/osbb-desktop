@@ -1,4 +1,4 @@
-name: Build OSBB App (windows/amd64)
+name: Build OSBB App (windows/arm64)
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
       run: choco install nsis -y
 
     - name: Build Wails App
-      run: wails build -platform windows/amd64 --nsis -o osbb.exe
+      run: wails build -platform windows/arm64 --nsis -o osbb.exe
 
     - name: List all EXE files
       shell: pwsh
@@ -43,4 +43,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: osbb-installer
-        path: build\bin\osbb-amd64-installer.exe
+        path: build\bin\osbb-arm64-installer.exe
