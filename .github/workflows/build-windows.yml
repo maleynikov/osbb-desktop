@@ -33,7 +33,7 @@ jobs:
       run: wails build -platform windows/amd64 -o osbb_amd64.exe
 
     - name: Build Windows Installer
-      run: makensis build/windows/installer/project.nsi
+      run: makensis /DARG_WAILS_AMD64_BINARY="build/bin/osbb_amd64.exe" build/windows/installer/project.nsi
 
     - name: Upload EXE artifact
       uses: actions/upload-artifact@v4
