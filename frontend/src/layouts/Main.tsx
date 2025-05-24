@@ -5,6 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 import pages, { Page } from "../pages";
 import { hash } from "../utils/hash";
 import { useTranslation } from "react-i18next";
+import { Link } from 'react-router';
 
 
 const MainLayout = () => {
@@ -21,10 +22,10 @@ const MainLayout = () => {
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
         <Typography
-            variant="h6"
+            variant="h6"  
             noWrap
-            component="a"
-            href="/dashboard"
+            component={Link}
+            to="/dashboard"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
