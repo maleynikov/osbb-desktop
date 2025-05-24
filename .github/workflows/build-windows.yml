@@ -2,7 +2,7 @@ name: Build OSBB App (windows/amd64)
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   workflow_dispatch: ###
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
       run: choco install nsis -y
 
     - name: Build Wails App
-      run: wails build -platform windows/amd64 --nsis
+      run: wails build -platform windows/amd64 --nsis -o osbb.exe
 
     - name: Build Windows Installer
       run: makensis /DARG_WAILS_AMD64_BINARY="build/bin/osbb.exe" build/windows/installer/project.nsi
@@ -38,5 +38,5 @@ jobs:
     - name: Upload EXE artifact
       uses: actions/upload-artifact@v4
       with:
-        name: osbb-windows-build
+        name: osbb-windows
         path: build/bin/osbb.exe
