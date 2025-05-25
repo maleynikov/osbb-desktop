@@ -50,7 +50,7 @@ const MainLayout = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      <Container maxWidth="lg" sx={{ mt: 8, mb: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 10, mb: 4 }}>
         <Outlet />
       </Container>
     </Box>

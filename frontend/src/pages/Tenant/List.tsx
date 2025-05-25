@@ -53,9 +53,13 @@ export default () => {
   const [selectedIds, setSelectedIds] = useState<GridRowId[]>([]);
   const [trigger, setTrigger] = useState(0);
 
-  const refetch = () => {
+  const onRefetch = () => {
     setTrigger(prev => prev + 1);
   };
+
+  const onSubmit = async (ids: Array<Number>) => {
+    return await TenantService.delete(ids);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,7 +91,11 @@ export default () => {
         </Typography>
         <div className="actions-area">
             {selectedIds.length > 0 && (
-              <DelRecordsBtn ids={selectedIds.map(id => Number(id))} onRefresh={refetch}/>
+              <DelRecordsBtn
+                ids={selectedIds.map(id => Number(id))}
+                onRefresh={onRefetch}
+                onSubmit={onSubmit}
+              />
             )}
             <Button
               variant="outlined"

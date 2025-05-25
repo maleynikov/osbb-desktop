@@ -3,12 +3,11 @@ import DelIcon from '@mui/icons-material/Delete';
 import { useTranslation } from "react-i18next";
 import ConfirmDialog from "../../../components/ConfirmDialog";
 import { useState } from "react";
-import TenantService from "../../../servises/Tenant";
-
 
 interface DelRecordsBtnProps {
   ids: Array<number>;
   onRefresh: () => void;
+  onSubmit: (ids: Array<Number>) => Promise<any>;
 }
 
 const DelRecordsBtn = (props: DelRecordsBtnProps) => {
@@ -21,12 +20,13 @@ const DelRecordsBtn = (props: DelRecordsBtnProps) => {
   }
   const onCancel = () => setOpen(false);
   const onConfirm = async () => {
-    const res = await TenantService.delete(props.ids);
-
-    if (res.status === "OK") {
-      props.onRefresh();
-    }
-    setOpen(false);
+    props.onSubmit(props.ids)
+      .then((res: any) => {
+        if (res.status === "OK") {
+          props.onRefresh();
+        }
+        setOpen(false);
+      })
   }
   const [open, setOpen] = useState(false);
 

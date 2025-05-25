@@ -1,5 +1,6 @@
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
 import Paper from '@mui/material/Paper';
+import { Tenant } from '../interfaces/tenant';
 
 const TenantTable = ({ tenants }: { tenants: Array<Tenant> }) => {
   return (
