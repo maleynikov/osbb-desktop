@@ -3,9 +3,11 @@ on:
   push:
     tags:
     - 'v*.*.*'
+permissions:
+  contents: write
 jobs:
   build-and-release:
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
     - name: "checkout code"
       uses: actions/checkout@v4
@@ -19,8 +21,14 @@ jobs:
       run: wails build -platform windows --nsis
     - name: "create checksums"
       run: |
-        sha256sum build/bin/osbb.exe > SHA256SUMS.txt
-        sha256sum build/bin/osbb-amd64-installer.exe >> SHA256SUMS.txt
+        sha256sum build\bin\osbb.exe > SHA256SUMS.txt
+        sha256sum build\bin\osbb-amd64-installer.exe >> SHA256SUMS.txt
+    - name: "list all EXE files"
+      shell: pwsh
+      run: |
+        Get-ChildItem -Recurse -Path build -Filter *.exe | ForEach-Object {
+          Write-Host "Found binary: $($_.FullName)"
+        }
     - name: "create GitHub release"
       uses: softprops/action-gh-release@v2
       with:
