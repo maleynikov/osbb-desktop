@@ -1,0 +1,32 @@
+name: "release OSBB (Windows)"
+on:
+  push:
+    tags:
+    - 'v*.*.*'
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: "checkout code"
+      uses: actions/checkout@v4
+    - name: "setup go"
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.23'
+    - name: "install Wails"
+      run: go install github.com/wailsapp/wails/v2/cmd/wails@latests
+    - name: "build Wails app"
+      run: wails build -platform windows --nsis
+    - name: "create checksums"
+      run: |
+        sha256sum build/bin/osbb.exe > SHA256SUMS.txt
+        sha256sum build/bin/osbb-amd64-installer.exe >> SHA256SUMS.txt
+    - name: "create GitHub release"
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          build\bin\osbb.exe
+          build\bin\osbb-amd64-installer.exe
+          SHA256SUMS.txt
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

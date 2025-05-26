@@ -2,7 +2,7 @@ name: Build OSBB App (windows)
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
   workflow_dispatch: ###
 
 jobs:
