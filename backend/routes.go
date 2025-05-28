@@ -42,6 +42,7 @@ func (s *Server) routes() http.Handler {
 		r.Get("/payments", handlers.PaymentsListHandler)
 		r.Post("/payments", handlers.PaymentsCreateHandler)
 		r.Delete("/payments", handlers.PaymentsDelHandler)
+		r.Get("/widgets/payments", handlers.WidgetPaymentsHandler)
 	})
 	r.Mount("/api", apiRouter)
 

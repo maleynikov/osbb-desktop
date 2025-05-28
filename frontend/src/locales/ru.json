@@ -8,10 +8,13 @@
     "login_failed": "Ошибка входа",
     "settings": "Настройки",
     "sign_out": "Выйти",
-    "dashboard": "Панель управления",
     "dashboard_title": "Добро пожаловать на панель управления!",
     "created": "Создано",
     "error": "Ошибка",
+    "dashboard": {
+        "title": "Панель управления",
+        "widgets": "Виджети"
+    },
     "tenants": {
         "title": "Управление жильцами",
         "list": "Список жилецьов",
@@ -68,6 +71,19 @@
         "settings": "Настройки",
         "dashboard": "Панель управления",
         "payments": "Платежи"
+    },
+    "widgets": {
+        "payments": {
+            "title": "Платежи",
+            "amount": "Сумма",
+            "count": "Количество",
+            "period": "Период",
+            "period_from": "Начало",
+            "period_to": "Конец"
+        },
+        "receipt": {
+            "title": "Квитанция"
+        }
     },
     "confirm_dialog": {
         "title": "Вы уверены?",
