@@ -53,7 +53,8 @@ func migrate() {
 		name TEXT NOT NULL,
 		account_num TEXT UNIQUE NOT NULL,
 		square REAL NOT NULL,
-		tarif REAL NOT NULL,
+		tarif DECIMAL(10,2) NOT NULL,
+		dept DECIMAL(10,2) NOT NULL,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );

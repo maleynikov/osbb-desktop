@@ -30,7 +30,7 @@ func TenantsListHandler(w http.ResponseWriter, r *http.Request) {
 
 	db := db.GetDB()
 
-	rows, err := db.Query("SELECT id, name, account_num, square, tarif FROM tenants LIMIT $1 OFFSET $2", payload.Limit, (payload.Page-1)*payload.Limit)
+	rows, err := db.Query("SELECT id, name, account_num, square, tarif, dept FROM tenants LIMIT $1 OFFSET $2", payload.Limit, (payload.Page-1)*payload.Limit)
 	if err != nil {
 		render.JSON(w, r, map[string]string{
 			"status": "FAIL",
@@ -40,14 +40,13 @@ func TenantsListHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer rows.Close()
 
-	var tenants []map[string]interface{}
+	var tenants []map[string]any
 	for rows.Next() {
 		var id int
 		var name, accountNum string
-		var square float32
-		var tarif float32
+		var square, tarif, dept float64
 
-		if err := rows.Scan(&id, &name, &accountNum, &square, &tarif); err != nil {
+		if err := rows.Scan(&id, &name, &accountNum, &square, &tarif, &dept); err != nil {
 			render.JSON(w, r, map[string]string{
 				"status": "FAIL",
 				"error":  err.Error(),
@@ -55,12 +54,13 @@ func TenantsListHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		tenants = append(tenants, map[string]interface{}{
+		tenants = append(tenants, map[string]any{
 			"id":          id,
 			"name":        name,
 			"account_num": accountNum,
 			"square":      square,
 			"tarif":       tarif,
+			"dept":        dept,
 		})
 	}
 	if err := rows.Err(); err != nil {
@@ -70,7 +70,7 @@ func TenantsListHandler(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-	render.JSON(w, r, map[string]interface{}{
+	render.JSON(w, r, map[string]any{
 		"status": "OK",
 		"data":   tenants,
 	})

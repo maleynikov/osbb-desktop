@@ -1,13 +1,14 @@
 package models
 
-import "time"
+import (
+	"gorm.io/gorm"
+)
 
 type Tenant struct {
-	ID         int       `json:"id"`
-	Name       string    `json:"name"`
-	AccountNum string    `json:"account_num"`
-	Squere     int       `json:"squere"`
-	Tarif      float32   `json:"tarif"`
-	CreatedAt  time.Time `json:"created_at"`
-	UpdatedAt  time.Time `json:"updated_at"`
+	gorm.Model
+	Name       string
+	AccountNum string `gorm:"uniqueIndex"`
+	Squere     int
+	Tarif      float32 `gorm:"type:decimal(10,2)"`
+	Dept       float32 `gorm:"type:decimal(10,2)"`
 }

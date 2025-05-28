@@ -9,8 +9,9 @@ import { useState } from "react";
 const initialValues = {
   name: '',
   account_num: '',
-  square: '0.0',
-  tarif: '0.00',
+  square: '',
+  tarif: '',
+  dept: '',
 }
 
 export default () => {
@@ -22,8 +23,9 @@ export default () => {
   const onSubmit = async (values: any, { resetForm }: FormikHelpers<any>) => {
     const preparedValues = {
       ...values,
-      tarif: parseFloat(values.tarif).toFixed(2),
-      square: parseFloat(values.square).toFixed(1),
+      square:  Number(parseFloat(values.square).toFixed(1)),
+      tarif: Number(parseFloat(values.tarif).toFixed(2)),
+      dept: Number(parseFloat(values.dept).toFixed(2)),
     };
     console.log('preparedValues', preparedValues);
     const res = await TenantService.create(preparedValues);
@@ -65,17 +67,20 @@ export default () => {
           onSubmit={onSubmit}
           validate={(values) => {
             const errors: any = {};
-            if (isNaN(Number(values.tarif)) || Number(values.tarif) <= 0) {
-              errors.tarif = t('err.tarif_invalid');
-            }
-            if (isNaN(Number(values.square)) || Number(values.square) <= 0) {
-              errors.square = t('err.square_required');
-            }
             if (!values.name) {
               errors.name = t('err.name_required');
             }
             if (!values.account_num) {
               errors.account_num = t('err.account_num_required');
+            }
+            if (isNaN(Number(values.square)) || Number(values.square) <= 0) {
+              errors.square = t('err.square_required');
+            }
+            if (isNaN(Number(values.tarif)) || Number(values.tarif) <= 0) {
+              errors.tarif = t('err.tarif_invalid');
+            }
+            if (isNaN(Number(values.dept)) || Number(values.dept) <= 0) {
+              errors.dept = t('err.dept_invalid');
             }
             return errors;
           }}
@@ -136,6 +141,7 @@ export default () => {
                       slotProps={{
                         input: {
                           endAdornment: <InputAdornment position="start">m2</InputAdornment>,
+                          placeholder: "0.0",
                         },
                       }}
                     />
@@ -150,6 +156,22 @@ export default () => {
                       slotProps={{
                         input: {
                           endAdornment: <InputAdornment position="start">rub</InputAdornment>,
+                          placeholder: "0.00",
+                        },
+                      }}
+                    />
+                    <TextField
+                      name="dept"
+                      size="small"
+                      variant="outlined"
+                      label={t('tenant.dept')}
+                      value={values.dept}
+                      error={Boolean(errors.dept)}
+                      onChange={handleChange}
+                      slotProps={{
+                        input: {
+                          endAdornment: <InputAdornment position="start">rub</InputAdornment>,
+                          placeholder: "0.00",
                         },
                       }}
                     />

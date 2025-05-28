@@ -11,7 +11,7 @@ import Toastr from "../../components/widgets/Toastr";
 
 const initialValues = {
   tenant_id: 0,
-  amount: '0.00',
+  amount: '',
   period: dayjs().date(1),
 }
 
@@ -164,6 +164,7 @@ export default () => {
                       slotProps={{
                         input: {
                           endAdornment: <InputAdornment position="start">rub</InputAdornment>,
+                          placeholder: "0.00",
                         },
                       }}
                     />

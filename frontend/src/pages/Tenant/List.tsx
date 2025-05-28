@@ -11,6 +11,7 @@ import DelRecordsBtn from './components/DelRecordsBtn';
 const defColumnOptions = {
   sortable: true,
   disableColumnMenu: true,
+  flex: 1,
 }
 
 const paginationModel = { page: 0, pageSize: 10 };
@@ -24,7 +25,6 @@ const columns: GridColDef[] = [
   {
     field: 'name',
     headerName: 'Name',
-    width: 300,
     ...defColumnOptions,
   },
   {
