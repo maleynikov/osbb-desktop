@@ -4,4 +4,5 @@ export interface Tenant {
     account_num: string;
     square: string;
     tarif: string;
+    dept: string;
 }

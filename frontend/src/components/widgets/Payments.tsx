@@ -34,42 +34,42 @@ export default (props: PaymentsWidgetProps) => {
   return (
     <Card variant="outlined">
       <CardContent>
-      <Typography gutterBottom variant="h6" component="div" sx={{ color: 'text.secondary'}}>
-        {t('widgets.payments.title')}
-      </Typography>
-      <Box>
-        <Typography component="div" variant="h4">
-          <b>{t('widgets.payments.amount')}</b>:{" " + data?.amount || 0} <small>rub</small>
+        <Typography gutterBottom variant="h6" component="div" sx={{ color: 'text.secondary'}}>
+          {t('widgets.payments.title')}
         </Typography>
-        <Typography component="div" variant="h6">
-          <b>{t('widgets.payments.count')}</b>:{" " + data?.count || 0}
-        </Typography>
-        <Box sx={{marginTop: 2}}>
-          <Typography gutterBottom component="div">
-            {t('widgets.payments.period')}
+        <Box>
+          <Typography component="div" variant="h4">
+            <b>{t('widgets.payments.amount')}</b>:{" " + data?.amount || 0} <small>rub</small>
           </Typography>
-          <Grid container size={12} spacing={2}>
-            <Grid size={6}>
-              <DatePicker
-                label={t('widgets.payments.period_from')}
-                onChange={(item: any) => setPeriod({
-                  ...period,
-                  from: item,
-                })}
-              />
+          <Typography component="div" variant="h6">
+            <b>{t('widgets.payments.count')}</b>:{" " + data?.count || 0}
+          </Typography>
+          <Box sx={{marginTop: 1.9}}>
+            <Typography gutterBottom component="div">
+              {t('widgets.payments.period')}
+            </Typography>
+            <Grid container size={12} spacing={2}>
+              <Grid size={6}>
+                <DatePicker
+                  label={t('widgets.payments.period_from')}
+                  onChange={(item: any) => setPeriod({
+                    ...period,
+                    from: item,
+                  })}
+                />
+              </Grid>
+              <Grid size={6}>
+                <DatePicker
+                  label={t('widgets.payments.period_to')}
+                  onChange={(item: any) => setPeriod({
+                    ...period,
+                    to: item
+                  })}
+                />
+              </Grid>
             </Grid>
-            <Grid size={6}>
-              <DatePicker
-                label={t('widgets.payments.period_to')}
-                onChange={(item: any) => setPeriod({
-                  ...period,
-                  to: item
-                })}
-              />
-            </Grid>
-          </Grid>
+          </Box>
         </Box>
-      </Box>
       </CardContent>
     </Card>
   );
