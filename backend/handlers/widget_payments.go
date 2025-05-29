@@ -37,12 +37,11 @@ func WidgetPaymentsHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	var amount sql.NullFloat64
+	var cnt sql.NullInt64
+
 	db := db.GetDB()
-	var data = struct {
-		Amount sql.NullFloat64 `json:"amount"`
-		Count  sql.NullInt64   `json:"count"`
-	}{}
-	err := db.QueryRow(query).Scan(&data.Amount, &data.Count)
+	err := db.QueryRow(query).Scan(&amount, &cnt)
 
 	if err != nil {
 		render.JSON(w, r, map[string]any{
@@ -55,8 +54,8 @@ func WidgetPaymentsHandler(w http.ResponseWriter, r *http.Request) {
 	render.JSON(w, r, map[string]any{
 		"status": "OK",
 		"data": map[string]any{
-			"amount": data.Amount.Float64,
-			"count":  data.Count.Int64,
+			"amount": amount.Float64,
+			"count":  cnt.Int64,
 		},
 	})
 }
