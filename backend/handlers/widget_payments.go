@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"database/sql"
 	"fmt"
 	"net/http"
 	"osbb/backend/db"
@@ -38,8 +39,8 @@ func WidgetPaymentsHandler(w http.ResponseWriter, r *http.Request) {
 
 	db := db.GetDB()
 	var data = struct {
-		Amount float64 `json:"amount"`
-		Count  int     `json:"count"`
+		Amount sql.NullFloat64 `json:"amount"`
+		Count  sql.NullInt64   `json:"count"`
 	}{}
 	err := db.QueryRow(query).Scan(&data.Amount, &data.Count)
 
@@ -48,10 +49,14 @@ func WidgetPaymentsHandler(w http.ResponseWriter, r *http.Request) {
 			"status": "FAIL",
 			"error":  err.Error(),
 		})
+		return
 	}
 
 	render.JSON(w, r, map[string]any{
 		"status": "OK",
-		"data":   data,
+		"data": map[string]any{
+			"amount": data.Amount.Float64,
+			"count":  data.Count.Int64,
+		},
 	})
 }
