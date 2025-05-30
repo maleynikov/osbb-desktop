@@ -4,7 +4,7 @@ import { Tenant } from "../../pages/Tenant/interfaces/tenant";
 import DatePicker from "../DatePicker";
 import { useState, useRef, useEffect } from "react";
 import Dialog from '@mui/material/Dialog';
-import { ReceiptOrigin } from "../../pages/Receipt/components/ReceiptOrigin";
+import Receipt from "../Receipt";
 import CloseIcon from '@mui/icons-material/Close';
 import TenantService from "../../servises/Tenant";
 import ReceiptsService from "../../servises/WidgetReceipts";
@@ -28,34 +28,46 @@ const receipts2: Array<any> = [
   {
     id: 1,
   name: 'Чернышева Елена Георгиевна',
-  accountNum: 47,
-  appNum: 47,
+  accNum: 47,
   square: 82.3,
   tarif: 4.80,
+  dept: 0.00,
+  accrued: 999.00,
+  paid: 0.0,
+  total: 0.0,
 },
 {
   id: 2,
   name: 'Чернышева Елена Георгиевна',
-  accountNum: 47,
-  appNum: 47,
+  accNum: 47,
   square: 82.3,
   tarif: 4.80,
+  dept: 0.00,
+  accrued: 1000.00,
+  paid: 0.0,
+  total: 0.0,
 },
 {
   id: 3,
   name: 'Чернышева Елена Георгиевна',
-  accountNum: 47,
-  appNum: 47,
+  accNum: 47,
   square: 82.3,
   tarif: 4.80,
+  dept: 0.00,
+  accrued: 230.00,
+  paid: 0.0,
+  total: 0.0,
 },
 {
   id: 4,
   name: 'Чернышева Елена Георгиевна',
-  accountNum: 47,
-  appNum: 47,
+  accNum: 47,
   square: 82.3,
   tarif: 4.80,
+  dept: 0.00,
+  accrued: 100.00,
+  paid: 0.0,
+  total: 0.0,
 }
 ];
 
@@ -107,7 +119,7 @@ const PopUp = ({ data, onClose }: PopUpProps) => {
       <DialogContent dividers>
         <Container className="receipts" maxWidth="lg" ref={componentRef}>
           {receipts2.map((data: any) => (
-            <ReceiptOrigin data={data}/>
+            <Receipt tenant={data} dt={data.dt} />
           ))}
         </Container>
        </DialogContent>

@@ -8,10 +8,10 @@ import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import CurrencyIcon from '@mui/icons-material/CurrencyBitcoin';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Button } from '@mui/material';
+import { IconButton } from '@mui/material';
 
 const BRANDING = {
-  title: 'Settings App',
+  title: 'Settings of App',
 };
 
 const NAVIGATION: Navigation = [
@@ -45,11 +45,9 @@ const ToolbarActions = () => {
   const nav = useNavigate();
 
   return (
-    <>
-      <Button onClick={() => nav('/dashboard')}>
-        <LogoutIcon />
-      </Button>
-    </>
+    <IconButton onClick={() => nav('/dashboard')}>
+      <LogoutIcon />
+    </IconButton>
   )
 }
 
