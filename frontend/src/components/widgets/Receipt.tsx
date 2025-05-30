@@ -1,4 +1,4 @@
-import { Autocomplete, Button, Card, CardContent, DialogActions, DialogContent, DialogTitle, Grid, IconButton, TextField, Typography } from "@mui/material"
+import { Autocomplete, Button, Card, CardContent, Container, DialogActions, DialogContent, DialogTitle, Grid, IconButton, TextField, Typography } from "@mui/material"
 import { useTranslation } from "react-i18next"
 import { Tenant } from "../../pages/Tenant/interfaces/tenant";
 import DatePicker from "../DatePicker";
@@ -9,6 +9,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import TenantService from "../../servises/Tenant";
 import ReceiptsService from "../../servises/WidgetReceipts";
 import dayjs from "dayjs";
+import CreateIcon from '@mui/icons-material/Create';
+import PrintIcon from '@mui/icons-material/Print';
+import DownloadIcon from '@mui/icons-material/Download';
+import { useReactToPrint } from "react-to-print";
 
 interface ReceiptData {
   ids: Array<Number>
@@ -20,36 +24,50 @@ interface PopUpProps {
   onClose: () => void
 }
 
-// const data: Array<ReceiptData> = [
-//   {
-//     id: 1,
-//   name: 'Чернышева Елена Георгиевна',
-//   accountNum: 47,
-//   appNum: 47,
-//   square: 82.3,
-//   tarif: 4.80,
-// },
-// {
-//   id: 2,
-//   name: 'Чернышева Елена Георгиевна',
-//   accountNum: 47,
-//   appNum: 47,
-//   square: 82.3,
-//   tarif: 4.80,
-// },
-// {
-//   id: 3,
-//   name: 'Чернышева Елена Георгиевна',
-//   accountNum: 47,
-//   appNum: 47,
-//   square: 82.3,
-//   tarif: 4.80,
-// }
-// ];
+const receipts2: Array<any> = [
+  {
+    id: 1,
+  name: 'Чернышева Елена Георгиевна',
+  accountNum: 47,
+  appNum: 47,
+  square: 82.3,
+  tarif: 4.80,
+},
+{
+  id: 2,
+  name: 'Чернышева Елена Георгиевна',
+  accountNum: 47,
+  appNum: 47,
+  square: 82.3,
+  tarif: 4.80,
+},
+{
+  id: 3,
+  name: 'Чернышева Елена Георгиевна',
+  accountNum: 47,
+  appNum: 47,
+  square: 82.3,
+  tarif: 4.80,
+},
+{
+  id: 4,
+  name: 'Чернышева Елена Георгиевна',
+  accountNum: 47,
+  appNum: 47,
+  square: 82.3,
+  tarif: 4.80,
+}
+];
 
 const PopUp = ({ data, onClose }: PopUpProps) => {
   const { t } = useTranslation();
   const [receipts, setReceipts] = useState([]);
+  const componentRef = useRef<HTMLDivElement>(null);
+
+  const printHandle = useReactToPrint({
+    content: () => componentRef.current as HTMLDivElement,
+    documentTitle: t('receipt.title'),
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,8 +90,6 @@ const PopUp = ({ data, onClose }: PopUpProps) => {
       fullScreen
       open={true}
       onClose={onClose}
-      aria-labelledby="scroll-dialog-title"
-      aria-describedby="scr"
     >
       <DialogTitle sx={{ m: 0, p: 2 }}>{t('widgets.receipt.dialog.title')}</DialogTitle>
       <IconButton
@@ -89,23 +105,25 @@ const PopUp = ({ data, onClose }: PopUpProps) => {
         <CloseIcon />
       </IconButton>
       <DialogContent dividers>
-        <div className="receipts">
-          {receipts.map((data: any) => (
+        <Container className="receipts" maxWidth="lg" ref={componentRef}>
+          {receipts2.map((data: any) => (
             <ReceiptOrigin data={data}/>
           ))}
-        </div>
+        </Container>
        </DialogContent>
        <DialogActions>
          <Button
           variant="contained"
           size="small"
           color="inherit"
-          onClick={onClose}
-         >{t('btn.cancel')}</Button>
+          disabled={true}
+          startIcon={<DownloadIcon />}
+         >{t('btn.download')}</Button>
         <Button
           variant="contained"
           size="small"
-          onClick={onClose}
+          onClick={printHandle}
+          startIcon={<PrintIcon />}
         >{t('btn.print')}</Button>
        </DialogActions>
     </Dialog>
@@ -175,6 +193,7 @@ export default () => {
                 variant="contained"
                 size="small"
                 onClick={handleOpen}
+                startIcon={<CreateIcon />}
               >{t('widgets.receipt.buttons.create')}</Button>
             </Grid>
           </Grid>

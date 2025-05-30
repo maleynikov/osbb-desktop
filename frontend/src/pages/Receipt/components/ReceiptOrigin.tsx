@@ -17,10 +17,7 @@ interface ReceiptData {
 
 export const ReceiptOrigin = React.forwardRef<HTMLDivElement, { data: ReceiptData }>(
   ({ data }, ref) => (
-    <Box ref={ref} sx={{
-      padding: 2,
-      backgroundColor: "#fff",
-    }}>
+    <Box ref={ref} sx={{backgroundColor: "#fff"}}>
       <div style={{
         pageBreakInside: 'avoid',
         width: '100%',
@@ -48,22 +45,22 @@ export const ReceiptOrigin = React.forwardRef<HTMLDivElement, { data: ReceiptDat
           }}>
             <tbody>
               <tr>
-                <td>
-                  <p>
+                <td style={{width: '70%'}}>
+                  <p style={{height: '8px'}}>
                     <span>Адрес: </span>
                     <span style={{ fontWeight: 'bold' }}>ул. Героев Сталинграда 3, кв. {data.appNum}</span>
                   </p>
-                  <p>
+                  <p style={{height: '8px'}}>
                     <span>Собственник: </span>
                     <span style={{ fontWeight: 'bold' }}>{data.name}</span>
                   </p>
                 </td>
-                <td>
-                  <p>
+                <td style={{width: '30%'}}>
+                  <p style={{height: '8px'}}>
                     <span>Лицевой счет: </span>
                     <span style={{ fontWeight: 'bold' }}>{data.accountNum}</span>
                   </p>
-                  <p>
+                  <p style={{height: '8px'}}>
                     <span>Общая площадь: </span>
                     <span style={{ fontWeight: 'bold' }}>{data.square.toFixed(1).replace('.', ',')} м кв.</span>
                   </p>
@@ -73,7 +70,7 @@ export const ReceiptOrigin = React.forwardRef<HTMLDivElement, { data: ReceiptDat
           </table>
           <div className="contentTableChargesReceipt">
             <table id="table-charges-receipt-0"
-              className="table tableBordered" style={{ marginBottom: '5px' }}>
+              className="table tableBordered" style={{ marginBottom: '-6px' }}>
               <thead>
                 <tr className="borderedBlack">
                   <th align="center"
@@ -221,24 +218,24 @@ export const ReceiptOrigin = React.forwardRef<HTMLDivElement, { data: ReceiptDat
           <table style={{
             width: '100%',
             fontSize: '11px',
-            fontWeight: 500
+            fontWeight: 500,
           }}>
             <tbody>
               <tr>
                 <td>
-                  <p style={{height: '10px'}}>
+                  <p style={{height: '8px'}}>
                     <span>Реквизиты для оплаты: </span>
                     <span style={{ fontWeight: 'bold' }}>ТСЖ "Росинка"  ИНН 9001032516  КПП 900101001</span>
                   </p>
-                  <p style={{height: '10px'}}>
+                  <p style={{height: '8px'}}>
                     <span>Банк получателя: </span>
                     <span style={{ fontWeight: 'bold' }}>Сбербанк БИК 046015602</span>
                   </p>
-                  <p style={{height: '10px'}}>
+                  <p style={{height: '8px'}}>
                     <span>Расчетный счет: </span>
                     <span style={{ fontWeight: 'bold' }}>Р/С 40703810452720000076</span>
                   </p>
-                  <p style={{height: '10px'}}>
+                  <p style={{height: '8px'}}>
                     <span>Назначение платежа: </span>
                     <span style={{ fontWeight: 'bold' }}>л/с 47 Чернышева Елена Георгиевна. взносы на содержание дома </span>
                   </p>

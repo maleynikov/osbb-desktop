@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { ReceiptOrigin } from "./components/ReceiptOrigin";
 import { useTranslation } from "react-i18next";
 import PrintIcon from '@mui/icons-material/Print';
@@ -46,7 +46,9 @@ const ReceiptPage = () => {
           <PrintIcon />
         </Button>
       </Box>
-      <ReceiptOrigin ref={componentRef} data={data} />
+      <Box ref={componentRef}>
+        <ReceiptOrigin data={data}/>
+      </Box>
     </Box>
   );
 }

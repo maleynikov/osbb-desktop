@@ -3,7 +3,6 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Typography,
 } from '@mui/material';
 import React from 'react';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -50,8 +49,8 @@ const ProfileMenu = () => {
       >
         <MenuItem onClick={() => {
           setAnchorEl(null);
-          nav('/receipt')
-        }}>{t('receipt.title_example')}</MenuItem>
+          nav('/settings')
+        }}>{t('pages.settings')}</MenuItem>
         <MenuItem onClick={handleLogout}>{t('sign_out')}</MenuItem>
       </Menu>
     </Box>
