@@ -17,6 +17,13 @@ import {
   PaymentsEditPage,
 } from './pages';
 
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 
 const theme = createTheme({
   palette: {
@@ -29,32 +36,34 @@ const theme = createTheme({
 function App() {
   return (
     <div id="app">
-      <ThemeProvider theme={theme}>
-        <AuthProvider>
-          <Routes>
-              <Route element={<AuthLayout />}>
-                <Route path="login" element={<LoginPage />} />
-              </Route>
-              <Route element={<MainLayout />}>
-                <Route path="dashboard" element={<DashboardPage />} />
-                <Route path="tenants">
-                  <Route path="list" element={<TenantsListPage />} />
-                  <Route path=":tid/edit" element={<TenantsEditPage />} />
-                  <Route path="create" element={<TenantsEditPage />} />
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <AuthProvider>
+            <Routes>
+                <Route element={<AuthLayout />}>
+                  <Route path="login" element={<LoginPage />} />
                 </Route>
-                <Route path="payments">
-                  <Route path="list" element={<PaymentsListPage />} />
-                  <Route path=":pid/edit" element={<PaymentsEditPage />} />
+                <Route element={<MainLayout />}>
+                  <Route path="dashboard" element={<DashboardPage />} />
+                  <Route path="tenants">
+                    <Route path="list" element={<TenantsListPage />} />
+                    <Route path=":tid/edit" element={<TenantsEditPage />} />
+                    <Route path="create" element={<TenantsEditPage />} />
+                  </Route>
+                  <Route path="payments">
+                    <Route path="list" element={<PaymentsListPage />} />
+                    <Route path=":pid/edit" element={<PaymentsEditPage />} />
+                  </Route>
+                  <Route path="receipt" element={<ReceiptPage />} />
                 </Route>
-                <Route path="receipt" element={<ReceiptPage />} />
-              </Route>
-              <Route element={<ProfileLayout />}>
-                <Route path="settings" element={<SettingsPage />} />
-              </Route>
-              <Route index element={<Navigate to="login" />} />
-            </Routes>
-        </AuthProvider>
-      </ThemeProvider>
+                <Route element={<ProfileLayout />}>
+                  <Route path="settings" element={<SettingsPage />} />
+                </Route>
+                <Route index element={<Navigate to="login" />} />
+              </Routes>
+          </AuthProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
     </div>
   )
 }

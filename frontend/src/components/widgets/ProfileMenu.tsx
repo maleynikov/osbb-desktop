@@ -47,7 +47,7 @@ const ProfileMenu = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => {
+        <MenuItem disabled onClick={() => {
           setAnchorEl(null);
           nav('/settings')
         }}>{t('pages.settings')}</MenuItem>
