@@ -5,6 +5,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat';
 export interface ReceiptProps {
   dt: Date;
   tenant: {
+    id: number;
     name: string;
     accNum: string;
     square: Number;

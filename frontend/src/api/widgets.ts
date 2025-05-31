@@ -35,6 +35,6 @@ export const receipts = async (payload: ReceiptsPayload): Promise<Receipt[]> => 
     if (res.status === 'FAIL') {
       throw new Error(`fetch fail: ${res.error}`);
     }
-    return res.data;
+    return res.data || [];
   });
 }

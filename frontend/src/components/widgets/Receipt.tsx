@@ -12,6 +12,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import DownloadIcon from '@mui/icons-material/Download';
 import { useReactToPrint } from "react-to-print";
 import { useReceipts } from "../../hooks/widgets/useReceipts";
+import dayjs from "dayjs";
 
 interface ReceiptData {
   ids: Array<number>
@@ -22,20 +23,6 @@ interface PopUpProps {
   data: ReceiptData
   onClose: () => void
 }
-
-// const receipts2: Array<any> = [
-//   {
-//     id: 1,
-//   name: 'Чернышева Елена Георгиевна',
-//   accNum: 47,
-//   square: 82.3,
-//   tarif: 4.80,
-//   dept: 0.00,
-//   accrued: 999.00,
-//   paid: 0.0,
-//   total: 0.0,
-// },
-// ];
 
 const PopUp = ({ data , onClose }: PopUpProps) => {
   const { t } = useTranslation();
@@ -69,8 +56,11 @@ const PopUp = ({ data , onClose }: PopUpProps) => {
       <DialogContent dividers>
         <Container className="receipts" maxWidth="lg" ref={componentRef}>
           {receipts.map((data: any) => (
-            <Receipt tenant={data} dt={data.dt} />
+            <Receipt key={data.id} tenant={data} dt={data.dt} />
           ))}
+          {receipts.length === 0 && (
+            <center>{t('no_records')}</center>
+          )}
         </Container>
        </DialogContent>
        <DialogActions>
@@ -148,6 +138,7 @@ export default () => {
                 label={t('widgets.receipt.month')}
                 views={['month', 'year']}
                 onChange={(item: any) => setDt(item)}
+                defaultValue={dayjs()}
               />
             </Grid>
             <Grid size={12} sx={{paddingTop: 2}}>
@@ -156,7 +147,7 @@ export default () => {
                 size="small"
                 onClick={handleOpen}
                 startIcon={<CreateIcon />}
-                disabled={false}
+                disabled={ids.length === 0}
               >{t('widgets.receipt.buttons.create')}</Button>
             </Grid>
           </Grid>
