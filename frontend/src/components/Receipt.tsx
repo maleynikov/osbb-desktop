@@ -165,14 +165,6 @@ export default (props: ReceiptProps) => {
                     fontSize: '10px',
                     border: '1px solid #0c0c0c',
                     width: '10%',
-                  }} align="right">{amountView(props.tenant.dept)}</td>
-                  <td style={{
-                    verticalAlign: 'middle',
-                    padding: '2px 4px 2px 2px',
-                    color: '#0c0c0c',
-                    fontSize: '10px',
-                    border: '1px solid #0c0c0c',
-                    width: '10%',
                   }} align="right">{amountView(props.tenant.accrued)}</td>
                   <td style={{
                     verticalAlign: 'middle',
@@ -181,7 +173,7 @@ export default (props: ReceiptProps) => {
                     fontSize: '10px',
                     border: '1px solid #0c0c0c',
                     width: '10%',
-                  }} align="right">0,00</td>
+                  }} align="right">{amountView(0)}</td>
                   <td style={{
                     verticalAlign: 'middle',
                     padding: '2px 4px 2px 2px',
@@ -190,6 +182,14 @@ export default (props: ReceiptProps) => {
                     border: '1px solid #0c0c0c',
                     width: '10%',
                   }} align="right">{amountView(props.tenant.paid)}</td>
+                  <td style={{
+                    verticalAlign: 'middle',
+                    padding: '2px 4px 2px 2px',
+                    color: '#0c0c0c',
+                    fontSize: '10px',
+                    border: '1px solid #0c0c0c',
+                    width: '10%',
+                  }} align="right">{amountView(props.tenant.total)}</td>
                 </tr>
               </tbody>
               <tfoot>

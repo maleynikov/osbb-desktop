@@ -50,8 +50,6 @@ func WidgetReceiptsHandler(w http.ResponseWriter, r *http.Request) {
 		args[i+1] = id
 	}
 
-	fmt.Println("ARGS:", args)
-
 	query := fmt.Sprintf(`
 		SELECT
 			t.id,
@@ -62,7 +60,7 @@ func WidgetReceiptsHandler(w http.ResponseWriter, r *http.Request) {
 			t.dept,
 			ROUND(t.tarif * t.square, 2) accrued,
 			COALESCE(SUM(p.amount), 0) paid,
-			ROUND(t.tarif * t.square - t.dept + COALESCE(SUM(p.amount), 0), 2) total
+			ROUND((t.dept + t.tarif * t.square) - COALESCE(SUM(p.amount), 0), 2) total
 		FROM tenants t
 		LEFT JOIN payments p
 			ON p.tenant_id = t.id AND p.period = ?
@@ -81,9 +79,6 @@ func WidgetReceiptsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer rows.Close()
-
-	fmt.Println("SQL:", query)
-	fmt.Println("ARGS:", args)
 
 	var data []Receipt
 	for rows.Next() {
