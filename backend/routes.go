@@ -37,13 +37,14 @@ func (s *Server) routes() http.Handler {
 	apiRouter.Group(func(r chi.Router) {
 		r.Use(middlewares.AuthMiddleware())
 		r.Get("/tenants", handlers.TenantsListHandler)
-		r.Post("/tenants/create", handlers.TenantsCreateHandler)
+		r.Post("/tenants/upset", handlers.TenantsUpsetHandler)
 		r.Delete("/tenants/delete", handlers.TenantsDelHandler)
 		r.Get("/payments", handlers.PaymentsListHandler)
 		r.Post("/payments", handlers.PaymentsCreateHandler)
 		r.Delete("/payments", handlers.PaymentsDelHandler)
 		r.Get("/widgets/payments", handlers.WidgetPaymentsHandler)
 		r.Post("/widgets/receipts", handlers.WidgetReceiptsHandler)
+		r.Get("/tenants/{tid}", handlers.TenantsOneHandler)
 	})
 	r.Mount("/api", apiRouter)
 

@@ -4,21 +4,32 @@ import { useTranslation } from "react-i18next";
 import { Formik, FormikHelpers } from "formik";
 import TenantService from "../../servises/Tenant";
 import Toastr from "../../components/widgets/Toastr";
-import { useState } from "react";
-
-const initialValues = {
-  name: '',
-  account_num: '',
-  square: '',
-  tarif: '',
-  dept: '',
-}
+import { useEffect, useState } from "react";
 
 export default () => {
   const params = useParams();
   const { t } = useTranslation();
   const [success, setSuccess] = useState(false);
   const [err, setErr] = useState(false);
+  const isEdit = params.tid && params.tid !== '0';
+  const [initVals, setVals] = useState({
+    id: 0,
+    name: '',
+    account_num: '',
+    square: '',
+    tarif: '',
+    dept: '',
+  });
+
+  useEffect(() => {
+    const fetchData = async (tid: number) => {
+      const res = await TenantService.getOne(tid);
+      if (res.status === 'OK') {
+        setVals(res.data);
+      }
+    }
+    if (params.tid) fetchData(Number(params.tid));
+  }, [params]);
 
   const onSubmit = async (values: any, { resetForm }: FormikHelpers<any>) => {
     const preparedValues = {
@@ -27,15 +38,12 @@ export default () => {
       tarif: Number(parseFloat(values.tarif).toFixed(2)),
       dept: Number(parseFloat(values.dept).toFixed(2)),
     };
-    console.log('preparedValues', preparedValues);
-    const res = await TenantService.create(preparedValues);
+    const res = await TenantService.upset(preparedValues);
     if (res.status === 'OK') {
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
-      // clear form
-      resetForm();
+      if (!isEdit) resetForm();
     }
-
     if (res.status === 'FAIL') {
       setErr(true);
       setTimeout(() => setErr(false), 3000);
@@ -59,11 +67,12 @@ export default () => {
           marginBottom: 2,
         }}>
           <Typography variant="h5" gutterBottom>
-            {(params.tid && params.tid !== '0') ? t('tenants.item.edit', { id: params.tid }) : t('tenants.item.new')}
+            {isEdit ? t('tenants.item.edit', { id: params.tid }) : t('tenants.item.new')}
           </Typography>
         </Box>
         <Formik
-          initialValues={initialValues}
+          initialValues={initVals}
+          enableReinitialize={true}
           onSubmit={onSubmit}
           validate={(values) => {
             const errors: any = {};

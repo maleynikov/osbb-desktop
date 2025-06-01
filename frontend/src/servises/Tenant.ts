@@ -2,6 +2,15 @@ import { Tenant } from '../pages/Tenant/interfaces/tenant';
 import { header as authHeader } from '../utils/auth';
 
 class TenantService {
+  public static async getOne(id: number): Promise<any> {
+    return fetch(`${import.meta.env.VITE_API_URL}/tenants/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        ...authHeader(),
+      },
+    }).then((res) => res.json());
+  }
   public static async getAll(): Promise<any> {
     return fetch(`${import.meta.env.VITE_API_URL}/tenants`, {
       method: 'GET',
@@ -11,8 +20,8 @@ class TenantService {
       },
     }).then((res) => res.json());
   }
-  public static async create(data: Tenant): Promise<any> {
-    return fetch(`${import.meta.env.VITE_API_URL}/tenants/create`, {
+  public static async upset(data: Tenant): Promise<any> {
+    return fetch(`${import.meta.env.VITE_API_URL}/tenants/upset`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

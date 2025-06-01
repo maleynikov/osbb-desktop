@@ -1,6 +1,7 @@
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { Tenant } from '../interfaces/tenant';
+import { t } from 'i18next';
 
 const TenantTable = ({ tenants }: { tenants: Array<Tenant> }) => {
   return (
@@ -9,7 +10,7 @@ const TenantTable = ({ tenants }: { tenants: Array<Tenant> }) => {
       <Table>
           <TableHead>
             <TableRow>
-              <TableCell component="th" scope="row">ID</TableCell>
+              <TableCell component="th" scope="row">{t('id2')}</TableCell>
               <TableCell align="right" component="th">Name</TableCell>
               <TableCell align="right" component="th">Account Num</TableCell>
               <TableCell align="right" component="th">Squere</TableCell>

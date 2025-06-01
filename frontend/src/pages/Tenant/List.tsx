@@ -6,7 +6,9 @@ import { useEffect, useState } from 'react';
 import TenantService from '../../servises/Tenant';
 import { useNavigate } from 'react-router';
 import DelRecordsBtn from './components/DelRecordsBtn';
-
+import i18n from '../../i18n';
+import { GridActionsCellItem } from '@mui/x-data-grid';
+import EditIcon from '@mui/icons-material/Edit';
 
 const defColumnOptions = {
   sortable: true,
@@ -15,36 +17,6 @@ const defColumnOptions = {
 }
 
 const paginationModel = { page: 0, pageSize: 10 };
-
-const columns: GridColDef[] = [
-  { 
-    field: 'id',
-    headerName: 'ID',
-    ...defColumnOptions,
-  },
-  {
-    field: 'name',
-    headerName: 'Name',
-    ...defColumnOptions,
-  },
-  {
-    field: 'account_num',
-    headerName: 'Account Number',
-    ...defColumnOptions,
-  },
-  {
-    field: 'square',
-    headerName: 'Square',
-    type: 'number',
-    ...defColumnOptions,
-  },
-  {
-    field: 'tarif',
-    headerName: 'Tarif',
-    type: 'number',
-    ...defColumnOptions,
-  },
-];
 
 export default () => {
   const [rows, setRows] = useState([]);
@@ -60,6 +32,56 @@ export default () => {
   const onSubmit = async (ids: Array<Number>) => {
     return await TenantService.delete(ids);
   }
+
+  const columns: GridColDef[] = [
+    { 
+      field: 'id',
+      headerName: i18n.t('tenants.tbl_header.id'),
+      ...defColumnOptions,
+    },
+    {
+      field: 'name',
+      headerName: i18n.t('tenants.tbl_header.name'),
+      ...defColumnOptions,
+    },
+    {
+      field: 'account_num',
+      headerName: i18n.t('tenants.tbl_header.acc'),
+      ...defColumnOptions,
+    },
+    {
+      field: 'square',
+      headerName: i18n.t('tenants.tbl_header.square'),
+      type: 'number',
+      ...defColumnOptions,
+    },
+    {
+      field: 'tarif',
+      headerName: i18n.t('tenants.tbl_header.tarif'),
+      type: 'number',
+      ...defColumnOptions,
+    },
+    {
+      field: 'dept',
+      headerName: i18n.t('tenants.tbl_header.dept'),
+      type: 'number',
+      ...defColumnOptions,
+    },
+    {
+      field: 'actions',
+      headerName: i18n.t('tenants.tbl_header.actions'),
+      type: 'actions',
+      ...defColumnOptions,
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<EditIcon />}
+          label={i18n.t('common.edit')}
+          onClick={() => nav(`/tenants/${params.id}/edit`)}
+          showInMenu={false}
+        />
+      ],
+    },
+  ];
 
   useEffect(() => {
     const fetchData = async () => {

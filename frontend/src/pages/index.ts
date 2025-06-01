@@ -3,7 +3,6 @@ import TenantsEditPage from './Tenant/Edit'
 import PaymentsListPage from './Payments/List';
 import PaymentsEditPage from './Payments/Edit';
 
-
 export interface Page {
   name: string;
   path: string;
