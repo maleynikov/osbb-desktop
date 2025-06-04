@@ -52,6 +52,7 @@ export default (props: PaymentsWidgetProps) => {
               <Grid size={6}>
                 <DatePicker
                   label={t('widgets.payments.period_from')}
+                  views={['month', 'year']}
                   onChange={(item: any) => setPeriod({
                     ...period,
                     from: item,
@@ -61,6 +62,7 @@ export default (props: PaymentsWidgetProps) => {
               <Grid size={6}>
                 <DatePicker
                   label={t('widgets.payments.period_to')}
+                  views={['month', 'year']}
                   onChange={(item: any) => setPeriod({
                     ...period,
                     to: item

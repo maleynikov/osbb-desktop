@@ -17,7 +17,7 @@ func WidgetPaymentsHandler(w http.ResponseWriter, r *http.Request) {
 	if from != "" {
 		fromTime, err := time.Parse(time.DateOnly, from)
 		if err == nil {
-			where = append(where, fmt.Sprintf("created_at >= '%v'", fromTime.Format(time.DateTime)))
+			where = append(where, fmt.Sprintf("period >= '%v-01'", fromTime.Format("2006-01")))
 		}
 	}
 
@@ -25,7 +25,7 @@ func WidgetPaymentsHandler(w http.ResponseWriter, r *http.Request) {
 	if to != "" {
 		toTime, err := time.Parse(time.DateOnly, to)
 		if err == nil {
-			where = append(where, fmt.Sprintf("created_at <= '%v 23:59:59'", toTime.Format(time.DateOnly)))
+			where = append(where, fmt.Sprintf("period <= '%v-02'", toTime.Format("2006-01")))
 		}
 	}
 

@@ -88,7 +88,7 @@ export default () => {
             if (isNaN(Number(values.tarif)) || Number(values.tarif) <= 0) {
               errors.tarif = t('err.tarif_invalid');
             }
-            if (isNaN(Number(values.dept)) || Number(values.dept) <= 0) {
+            if (isNaN(Number(values.dept)) || Number(values.dept) < 0) {
               errors.dept = t('err.dept_invalid');
             }
             return errors;

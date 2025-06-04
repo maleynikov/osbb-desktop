@@ -170,10 +170,10 @@ export default () => {
                     />
                     <DatePicker
                       label={t('payments.period')}
-                      format="LL"
-                      views={['year', 'month']}
-                      value={values.period}
+                      views={['month', 'year']}
                       onChange={(value: any) => setFieldValue('period', value)}
+                      value={values.period}
+                      defaultValue={dayjs()}
                     />
                   </CardContent>
                     <CardActions sx={{
