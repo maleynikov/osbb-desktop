@@ -32,7 +32,7 @@ func PaymentsCreateHandler(w http.ResponseWriter, r *http.Request) {
 	_, err := db.Exec("INSERT INTO payments (tenant_id, amount, period) VALUES ($1, $2, $3)",
 		payload.TenantID,
 		payload.Amount,
-		payload.Period.Format("2006-01"),
+		payload.Period.Format("2006-01-02"),
 	)
 	if err != nil {
 		render.JSON(w, r, map[string]string{

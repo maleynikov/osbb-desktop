@@ -43,7 +43,7 @@ func WidgetReceiptsHandler(w http.ResponseWriter, r *http.Request) {
 
 	placeholders := make([]string, len(payload.Ids))
 	args := make([]any, len(payload.Ids)+1)
-	args[0] = payload.Date.Format("2006-01")
+	args[0] = payload.Date.Format("2006-01-02")
 
 	for i, id := range payload.Ids {
 		placeholders[i] = "?"

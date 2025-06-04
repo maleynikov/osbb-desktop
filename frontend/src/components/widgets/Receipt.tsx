@@ -55,8 +55,8 @@ const PopUp = ({ data , onClose }: PopUpProps) => {
       </IconButton>
       <DialogContent dividers>
         <Container className="receipts" maxWidth="lg" ref={componentRef}>
-          {receipts.map((data: any) => (
-            <Receipt key={data.id} tenant={data} dt={data.dt} />
+          {receipts.map((_data: any) => (
+            <Receipt key={_data.id} tenant={_data} dt={data.dt} />
           ))}
           {receipts.length === 0 && (
             <center>{t('no_records')}</center>
