@@ -22,8 +22,8 @@ const amountView = (amount: Number): string => {
 }
 
 export default (props: ReceiptProps) => {
-  dayjs.extend(localizedFormat);
-  dayjs.locale('ru');
+  // dayjs.extend(localizedFormat);
+  // dayjs.locale('ru');
 
   return (
     <Box sx={{backgroundColor: "#fff"}}>
@@ -35,7 +35,7 @@ export default (props: ReceiptProps) => {
           fontSize: '13px',
         }}>
           <span>Квитанция на оплату взносов на содержание дома за </span>
-          <span style={{textTransform: 'lowercase'}}>{dayjs(props.dt).format('MMMM YYYY')} г.</span>
+          <span style={{textTransform: 'lowercase'}}>{dayjs(props.dt).locale('ru').format('MMMM YYYY')} г.</span>
         </div>
         <div style={{width: '100%', paddingTop: '4px'}}>
           <table style={{
@@ -224,19 +224,19 @@ export default (props: ReceiptProps) => {
                 <td>
                   <p style={{height: '8px'}}>
                     <span>Реквизиты для оплаты: </span>
-                    <span style={{ fontWeight: 'bold' }}>ТСЖ "Росинка"  ИНН 9001032516  КПП 900101001</span>
+                    <span style={{ fontWeight: 'bold' }}>ТСЖ «РОСИНКА» ОГРН 1259000001842; ИНН 9001032516; КПП 900101001</span>
                   </p>
                   <p style={{height: '8px'}}>
                     <span>Банк получателя: </span>
-                    <span style={{ fontWeight: 'bold' }}>Сбербанк БИК 046015602</span>
+                    <span style={{ fontWeight: 'bold' }}>Сбербанк, БИК 046015602</span>
                   </p>
                   <p style={{height: '8px'}}>
                     <span>Расчетный счет: </span>
-                    <span style={{ fontWeight: 'bold' }}>Р/С 40703810452720000076</span>
+                    <span style={{ fontWeight: 'bold' }}>р/с № 40703810452720000076 ЮГО-ЗАПАДНЫЙ БАНК ПАО</span>
                   </p>
                   <p style={{height: '8px'}}>
                     <span>Назначение платежа: </span>
-                    <span style={{ fontWeight: 'bold' }}>л/с {props.tenant.accNum} {props.tenant.name}. взносы на содержание дома </span>
+                    <span style={{ fontWeight: 'bold' }}>л/с {props.tenant.accNum} {props.tenant.name}. взносы на содержание дома</span>
                   </p>
                 </td>
               </tr>
