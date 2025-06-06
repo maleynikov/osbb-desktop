@@ -224,15 +224,15 @@ export default (props: ReceiptProps) => {
                 <td>
                   <p style={{height: '8px'}}>
                     <span>Реквизиты для оплаты: </span>
-                    <span style={{ fontWeight: 'bold' }}>ТСЖ «РОСИНКА» ОГРН 1259000001842; ИНН 9001032516; КПП 900101001</span>
+                    <span style={{ fontWeight: 'bold' }}>ТСЖ “РОСИНКА”  ИНН 9001032516  КПП 900101001</span>
                   </p>
                   <p style={{height: '8px'}}>
                     <span>Банк получателя: </span>
-                    <span style={{ fontWeight: 'bold' }}>Сбербанк, БИК 046015602</span>
+                    <span style={{ fontWeight: 'bold' }}>ЮГО-ЗАПАДНЫЙ БАНК ПАО СБЕРБАНК БИК 046015602</span>
                   </p>
                   <p style={{height: '8px'}}>
                     <span>Расчетный счет: </span>
-                    <span style={{ fontWeight: 'bold' }}>р/с № 40703810452720000076 ЮГО-ЗАПАДНЫЙ БАНК ПАО</span>
+                    <span style={{ fontWeight: 'bold' }}>Р/С 40703810452720000076</span>
                   </p>
                   <p style={{height: '8px'}}>
                     <span>Назначение платежа: </span>
